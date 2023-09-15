@@ -1,0 +1,22 @@
+.Home {
+    padding: 10px 20%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.informations{
+    padding-left: 20px;
+}
+
+.presentations{
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .button-container {
+      flex-direction: column;
+    }
+}
