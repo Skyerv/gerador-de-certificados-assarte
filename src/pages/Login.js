@@ -1,4 +1,5 @@
 import Nav from '../components/Nav';
+import CustomButton from '../components/CustomButton';
 import '../styles/Login.css';
 import { Link } from 'react-router-dom';
 
@@ -18,7 +19,7 @@ function Login() {
               <label>Senha:</label>
               <input type="password" placeholder="Password" />
             </div>
-            <button type="submit">Logar</button>
+            <CustomButton text='Logar'/>
           </form>
           <p>Não tem conta? <Link to='/cadastrar'>Cadastre aqui</Link></p>
         </div>
