@@ -4,7 +4,17 @@
 
 .button-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.space{
+    margin: 10px 30px;
+}
+
+.button1,
+.button2{
+    flex: 1;
 }
 
 .informations{

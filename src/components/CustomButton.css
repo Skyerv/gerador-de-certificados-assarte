@@ -1,15 +1,13 @@
 .custom-button {
     background-color: #D0F4DE;
     border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
+    border-radius: 15px;
+    padding: 12px 20px;
     font-size: 16px;
     color: #000000;
     cursor: pointer;
     outline: none;
     font-weight: bold;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-    min-width: 200px;
-    margin: 5px;
+    width: 100%;
 }
-
