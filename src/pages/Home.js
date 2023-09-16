@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import CustomButton from '../components/CustomButton';
 import Nav from '../components/Nav';
@@ -10,7 +11,7 @@ function Home() {
       <Nav/>
       <div className="button-container">
         <CustomButton text={"Pegar Certificados"} />
-        <CustomButton text={"Sou Professor"} />
+        <Link to='/login'><CustomButton text={"Sou Professor"} /></Link>
       </div>
       <Card/>
 
