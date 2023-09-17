@@ -1,0 +1,35 @@
+.container {
+    padding: 10px 20%;
+    
+}
+
+.buttons-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.buttons-column {
+    width: 40%;
+    min-width: 150px;
+    margin: 50px 0px;
+}
+
+.logout-button {
+    margin-top: 50px;
+}
+
+.logout-button button{
+    background-color: rgb(255, 83, 83);
+    color: white;
+}
+
+button{
+    margin: 10px 0px;
+}
+
+@media (max-width: 485px) {
+    .buttons-div {
+      flex-direction: column;
+    }
+}

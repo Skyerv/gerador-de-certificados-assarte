@@ -26,7 +26,7 @@ function RegisterTeacher() {
             </div>
             <CustomButton text='Cadastrar'/>
           </form>
-          <p>Já tem conta? <Link to='/login'>Clique aqui</Link></p>
+          <p>Já tem conta? <Link to='/login' className="link">Clique aqui</Link></p>
         </div>
         <div className="register-teacher-image">
           <img src="/images/loginRegisterImage.png" alt="Cadastro de Professor" />

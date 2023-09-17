@@ -19,9 +19,9 @@ function Login() {
               <label>Senha:</label>
               <input type="password" placeholder="Password" />
             </div>
-            <CustomButton text='Logar'/>
+            <Link to='/professor'><CustomButton text='Logar'/></Link>
           </form>
-          <p>Não tem conta? <Link to='/cadastrar'>Cadastre aqui</Link></p>
+          <p>Não tem conta? <Link to='/cadastrar' className='link'>Cadastre aqui</Link></p>
         </div>
         <div className="login-image">
           <img src="/images/loginRegisterImage.png" alt="Login" />

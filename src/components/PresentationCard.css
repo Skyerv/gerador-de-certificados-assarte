@@ -30,6 +30,11 @@
     font-size: 14px;
 }
 
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
 span{
     font-weight: bold;
 }
