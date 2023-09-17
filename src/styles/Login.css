@@ -40,7 +40,7 @@ p {
     margin-top: 15px;
 }
 
-a {
+a.link{
     text-decoration: underline;
     color: #01496D;
     font-weight: bold;
