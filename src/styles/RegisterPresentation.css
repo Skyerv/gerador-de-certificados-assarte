@@ -1,0 +1,45 @@
+.registerPresentationContainer{
+    padding: 10px 27%;
+}
+
+.formContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+  
+.column {
+    flex: 1;
+    padding: 10px;
+}
+
+.time {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.columnTime {
+    flex: 1;
+    padding: 5px;
+}
+
+.space {
+    margin-bottom: 110px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .column {
+        flex: auto;
+        margin: 5px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 945px) {
+    .registerPresentationContainer{
+        padding: 10px 20%;
+    }
+}
