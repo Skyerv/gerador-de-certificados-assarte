@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import RegisterTeacher from './pages/RegisterTeacher';
 import TeacherPage from './pages/TeacherPage';
 import RegisterPresentation from './pages/RegisterPresentation';
+import Certificate from './pages/Certificate';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/cadastrar" element={<RegisterTeacher/>} />
         <Route path="/professor" element={<TeacherPage/>} />
         <Route path="/registerPresentation" element={<RegisterPresentation/>} />
+        <Route path="/certificate" element={<Certificate/>} />
       </Routes>
     </Router>
   );
