@@ -8,11 +8,10 @@ function TeacherPage() {
   return (
     <div className="container">
         <Nav/>
-
         <div className="buttons-div">
             <div className="buttons-column">
                 <Link to='/login'><CustomButton text='Cadastrar Apresentação'/></Link>
-                <Link to='/login'><CustomButton text='Cadastrar Seus Alunos'/></Link>
+                <Link to='/cadastrar-alunos'><CustomButton text='Cadastrar Seus Alunos'/></Link>
             </div>
 
             <div className="logout-button">

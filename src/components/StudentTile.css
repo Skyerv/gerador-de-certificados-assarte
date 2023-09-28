@@ -1,0 +1,27 @@
+.student-tile {
+    display: flex;
+    background-color: #f2f2f2;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    transition: all .2s ease-in-out;
+}
+
+.student-tile:hover {
+    background-color: #e8eef1;
+    transform: scale(1.01);
+    transition: .2s;
+}
+
+.select-box {
+    background-color: #f7cfcf;
+    padding: 1rem;
+    margin: 0.5rem 1rem 0.5rem 0.5rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 15px;
+}
+
+.select-box:focus {
+    background-color: #dfaeae;
+}
