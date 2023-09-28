@@ -11,8 +11,6 @@ function TeacherPage() {
         <div className="buttons-div">
             <div className="buttons-column">
                 <Link to='/registerPresentation'><CustomButton text='Cadastrar Apresentação'/></Link>
-                <Link to='/login'><CustomButton text='Cadastrar Seus Alunos'/></Link>
-                <Link to='/login'><CustomButton text='Cadastrar Apresentação'/></Link>
                 <Link to='/cadastrar-alunos'><CustomButton text='Cadastrar Seus Alunos'/></Link>
             </div>
 
