@@ -7,8 +7,8 @@ Observação: necessário ter o `node` instalado. \
 
 ```bash
 # Instalar dependências
-$ yarn install
+$ npm install
 
-# Iniciar em localhost:8080
-$ yarn dev
+# Iniciar em localhost:3000
+$ npm start
 ```
