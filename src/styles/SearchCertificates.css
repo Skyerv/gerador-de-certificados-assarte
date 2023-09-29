@@ -1,0 +1,64 @@
+.search-certificates-container {
+    margin-top: 5rem;
+    padding: 10px 20%;
+}
+
+.text-hint {
+    display: block;
+    text-align: end;
+    margin-bottom: 1rem;
+}
+
+span {
+    font-weight: 400;
+}
+
+.name-container {
+    width: 40rem;
+    vertical-align: middle;
+}
+
+.form-group input {
+    vertical-align: middle;
+    width: 100%;
+    border: 1px solid #797979;
+    border-radius: 15px;
+    box-sizing: border-box;
+    height: 50%;
+}
+
+.search-certificate-form {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    align-items: center;
+    height: 3rem;
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.search-certificates-button {
+    width: 200px;
+}
+
+.search-certificates-button:hover {
+    background-color: #c8e6db;
+}
+
+.search-certificates-button:focus {
+    background-color: #b8dbce;
+    transform: scale(0.98);
+}
+
+.add-student-form label {
+    width: 20rem;
+}
+
+button {
+    margin: 10px 0px;
+    width: 5rem;
+}
+
+@media (max-width: 485px) {
+
+}

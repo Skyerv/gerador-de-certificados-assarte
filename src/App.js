@@ -8,6 +8,7 @@ import RegisterPresentation from './pages/RegisterPresentation';
 import Certificate from './pages/Certificate';
 import RegisterStudents from './pages/RegisterStudents';
 import RegisterSpectators from './pages/RegisterSpectators';
+import SearchCertificates from './pages/SearchCertificates';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/certificate" element={<Certificate/>} />
         <Route path="/cadastrar-alunos" element={<RegisterStudents/>} />
         <Route path="/cadastrar-espectadores" element={<RegisterSpectators/>} />
+        <Route path="/procurar-certificados" element={<SearchCertificates/>} />
       </Routes>
     </Router>
   );

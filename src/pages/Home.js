@@ -10,7 +10,7 @@ function Home() {
     <div className="Home">
       <Nav/>
       <div className="button-container">
-        <Link to='/login' className='button1'><CustomButton text={"Pegar Certificados"} /></Link>
+        <Link to='/procurar-certificados' className='button1'><CustomButton text={"Pegar Certificados"} /></Link>
         <div className='space'/>
         <Link to='/login' className='button2'><CustomButton text={"Sou Professor"} /></Link>
       </div>
