@@ -1,12 +1,12 @@
-import Nav from '../components/Nav';
-import CustomButton from '../components/CustomButton';
-import '../styles/Login.css';
-import { Link } from 'react-router-dom';
+import Nav from "../../components/nav/Nav";
+import CustomButton from "../../components/customButtom/CustomButton";
+import "./Login.css";
+import { Link } from "react-router-dom";
 
 function Login() {
   return (
     <div className="login">
-      <Nav/>
+      <Nav />
       <div className="login-container">
         <div className="login-form">
           <h2>Login</h2>
@@ -19,9 +19,16 @@ function Login() {
               <label>Senha:</label>
               <input type="password" placeholder="Password" />
             </div>
-            <Link to='/professor'><CustomButton text='Logar'/></Link>
+            <Link to="/professor">
+              <CustomButton text="Logar" />
+            </Link>
           </form>
-          <p>Não tem conta? <Link to='/cadastrar' className='link'>Cadastre aqui</Link></p>
+          <p>
+            Não tem conta?{" "}
+            <Link to="/cadastrar" className="link">
+              Cadastre aqui
+            </Link>
+          </p>
         </div>
         <div className="login-image">
           <img src="/images/loginRegisterImage.png" alt="Login" />

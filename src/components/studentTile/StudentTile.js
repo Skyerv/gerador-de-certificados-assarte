@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './PresentationCard.css';
+import '../presentationCard/PresentationCard.css';
 
 const StudentTile = ({ name }) => {
   return (

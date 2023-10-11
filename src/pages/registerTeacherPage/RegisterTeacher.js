@@ -1,8 +1,8 @@
-import React from 'react';
-import Nav from '../components/Nav';
-import CustomButton from '../components/CustomButton';
-import '../styles/RegisterTeacher.css';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Nav from "../../components/nav/Nav";
+import CustomButton from "../../components/customButtom/CustomButton";
+import "./RegisterTeacher.css";
+import { Link } from "react-router-dom";
 
 function RegisterTeacher() {
   return (
@@ -24,12 +24,20 @@ function RegisterTeacher() {
               <label>Senha:</label>
               <input type="password" placeholder="Senha" />
             </div>
-            <CustomButton text='Cadastrar'/>
+            <CustomButton text="Cadastrar" />
           </form>
-          <p>Já tem conta? <Link to='/login' className="link">Clique aqui</Link></p>
+          <p>
+            Já tem conta?{" "}
+            <Link to="/login" className="link">
+              Clique aqui
+            </Link>
+          </p>
         </div>
         <div className="register-teacher-image">
-          <img src="/images/loginRegisterImage.png" alt="Cadastro de Professor" />
+          <img
+            src="/images/loginRegisterImage.png"
+            alt="Cadastro de Professor"
+          />
         </div>
       </div>
     </div>
