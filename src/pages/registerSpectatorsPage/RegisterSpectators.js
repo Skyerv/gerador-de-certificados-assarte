@@ -1,7 +1,7 @@
 import React from "react";
 import Nav from "../../components/nav/Nav";
 import "./RegisterSpectators.css";
-import "../../components/spectatorTile/SpectatorTile.css";
+import Button from "../../components/Button/Button";
 import SpectatorTile from "../../components/spectatorTile/SpectatorTile";
 
 function RegisterSpectators() {
@@ -15,11 +15,11 @@ function RegisterSpectators() {
             <div className="form-group add-student-form">
               <span>Nome do espectador:</span>
               <input type="text" placeholder="Nome do espectador" />
-              <button className="register-student-button">Adicionar</button>
+              <Button text="Adicionar"/>
             </div>
             <div className="form-group search-student-form">
               <input type="text" placeholder="Pesquisar espectador" />
-              <button className="register-student-button">Buscar</button>
+              <Button text="Buscar"/>
             </div>
           </form>
         </div>

@@ -1,0 +1,32 @@
+.navContainer {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navImage {
+  position: absolute;
+  left: 80px;
+  margin: 0;
+}
+
+.navTitle {
+  text-align: center;
+  margin: 15px;
+  flex: 1;
+}
+
+@media (max-width: 801px) {
+  .navContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navImage {
+    display: none;
+  }
+}

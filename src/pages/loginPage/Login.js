@@ -1,13 +1,13 @@
 import Nav from "../../components/nav/Nav";
-import CustomButton from "../../components/customButtom/CustomButton";
+import Button from "../../components/Button/Button";
 import "./Login.css";
 import { Link } from "react-router-dom";
 
 function Login() {
   return (
-    <div className="login">
+    <div className="login-container">
       <Nav />
-      <div className="login-container">
+      <div className="login-body">
         <div className="login-form">
           <h2>Login</h2>
           <form>
@@ -20,7 +20,7 @@ function Login() {
               <input type="password" placeholder="Password" />
             </div>
             <Link to="/professor">
-              <CustomButton text="Logar" />
+              <Button text="Logar" />
             </Link>
           </form>
           <p>

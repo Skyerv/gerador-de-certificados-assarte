@@ -1,7 +1,7 @@
 import React from "react";
 import Nav from "../../components/nav/Nav";
 import "./SearchCertificates.css";
-import "../../components/studentTile/StudentTile.css";
+import Button from "../../components/Button/Button";
 import StudentTile from "../../components/studentTile/StudentTile";
 
 function SearchCertificates() {
@@ -9,11 +9,12 @@ function SearchCertificates() {
     <div className="search-certificates">
       <Nav />
       <div className="search-certificates-container">
+        <h2>Procurar Certificado</h2>
         <div className="search-certificates-form">
           <form>
             <div className="form-group search-certificate-form">
               <input type="text" placeholder="Pesquisar por nome" />
-              <button className="search-certificates-button">Pesquisar</button>
+              <Button text="Pesquisar"/>
             </div>
           </form>
           <div className="text-hint">

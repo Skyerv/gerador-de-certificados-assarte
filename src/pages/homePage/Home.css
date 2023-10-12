@@ -1,32 +1,41 @@
-.Home {
-    padding: 10px 20%;
+.home-body {
+  padding: 10px 20%;
+}
+
+.home-body button{
+  width: 100%;
 }
 
 .button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.space{
-    margin: 10px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button1,
-.button2{
-    flex: 1;
+.button2 {
+  margin: 10px;
+  width: 100%;
 }
 
-.informations{
-    padding-left: 20px;
+.home-body .admin-date-hour-informations,
+.home-body .admin-description,
+.home-body .admin-phone-information,
+.home-body .admin-local-information {
+  padding-left: 20px;
 }
 
-.presentations{
-    font-weight: bold;
+.home-body .admin-phone-information,
+.home-body .admin-local-information {
+  margin: 0px;
+}
+
+.presentations {
+  font-weight: bold;
 }
 
 @media (max-width: 600px) {
-    .button-container {
-      flex-direction: column;
-    }
+  .button-container {
+    flex-direction: column;
+  }
 }

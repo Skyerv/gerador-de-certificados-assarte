@@ -1,57 +1,70 @@
 .certificate-top {
-    position: relative;
-    text-align: center;
-  }
-  
-  .certificate-top img {
-    width: 100%;
-    max-height: 200px;
-    display: block;
-    margin: 0 auto;
-    object-fit: cover;
-  }
-  
-  .certificate-top .navbar {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-  }
+  position: relative;
+  text-align: center;
+}
 
-  .certificate-p{
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-  }
+.certificate-top .Nav_navContainer__Tpw\+N{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
 
-  .intro-p{
-    margin-top: 20px;
-  }
+.certificate-top .sustentabilityImg {
+  width: 100%;
+  max-height: 200px;
+  display: block;
+  object-fit: cover;
+}
 
-  .table-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.certificate-p {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-  table {
-    margin-top: 20px;
-    width: 1000px;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    padding: 8px;
-    text-align: center;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
+.intro-p {
+  margin-top: 20px;
+}
 
-  .downloadCertificateButton{
-    margin: 20px auto;
-    width: 400px;
+h1.name{
+  text-align: center;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  margin-top: 20px;
+  width: 1000px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.downloadCertificateButton {
+  margin: 20px auto;
+  width: 400px;
+}
+
+.Certificate button{
+  width: 100%;
+}
+
+@media (max-width: 486px) {
+  .certificate-top .Nav_navContainer__Tpw\+N{
+    width: 465px;
   }
-  
+}

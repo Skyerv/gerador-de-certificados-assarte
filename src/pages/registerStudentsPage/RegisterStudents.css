@@ -1,65 +1,45 @@
-.register-students {
-    padding: 10px 20%;
+.register-students-body {
+  padding: 10px 20%;
 }
 
 .name-container {
-    width: 40rem;
-    vertical-align: middle;
-}
-
-.form-group input {
-    vertical-align: middle;
-    width: 100%;
-    border: 1px solid #797979;
-    border-radius: 15px;
-    box-sizing: border-box;
-    height: 50%;
+  width: 40rem;
+  vertical-align: middle;
 }
 
 .add-student-form {
-    /* display: flex;
+  /* display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem; */
-    align-items: center;
-    height: 3rem;
-    display: grid;
-    grid-template-columns: 1fr 6fr 1fr;
-    gap: 1rem;
+  align-items: center;
+  height: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+  gap: 1rem;
 }
 
 .search-student-form {
-    display: grid;
-    grid-template-columns: 5fr 1fr;
-    align-items: center;
-    height: 3rem;
-    display: grid;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.register-student-button {
-    width: 200px;
-}
-
-.register-student-button:hover {
-    background-color: #c8e6db;
-}
-
-.register-student-button:focus {
-    background-color: #b8dbce;
-    transform: scale(0.98);
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  align-items: center;
+  height: 3rem;
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .add-student-form label {
-    width: 20rem;
+  width: 100rem;
 }
 
-button {
-    margin: 10px 0px;
-    width: 5rem;
+.add-student-form span{
+  min-width: 80px;
+}
+
+.register-students-body button{
+  width: 150px;
 }
 
 @media (max-width: 485px) {
-
 }

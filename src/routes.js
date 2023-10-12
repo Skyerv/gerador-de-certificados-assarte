@@ -10,7 +10,7 @@ import RegisterStudents from "./pages/registerStudentsPage/RegisterStudents";
 import RegisterSpectators from "./pages/registerSpectatorsPage/RegisterSpectators";
 import SearchCertificates from "./pages/searchCertificatesPage/SearchCertificates";
 
-function App() {
+function routes() {
   return (
     <Router>
       <Routes>
@@ -34,4 +34,4 @@ function App() {
   );
 }
 
-export default App;
+export default routes;

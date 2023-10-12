@@ -1,29 +1,44 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './PresentationCard.css';
+import React from "react";
+import PropTypes from "prop-types";
+import PresentationCardCSS from "./PresentationCard.module.css";
 
-const PresentationCard = ({ title, date, responsible, presenter, initialHour, finalHour }) => {
+const PresentationCard = ({
+  title,
+  date,
+  responsible,
+  presenter,
+  initialHour,
+  finalHour,
+}) => {
   return (
-    <div className="custom-card">
-      <div className="custom-card-content">
-        <h2 className="custom-card-title">{title}</h2>
-        <p className="custom-card-date"><span>Dia: {date} das {initialHour} até {finalHour}</span></p>
+    <div className={PresentationCardCSS.presentationCardContainer}>
+      <div className={PresentationCardCSS.presentationCardContent}>
+        <h2 className={PresentationCardCSS.presentationCardTitle}>{title}</h2>
+        <p className={PresentationCardCSS.presentationCardDate}>
+          <strong>
+            Dia: {date} das {initialHour} até {finalHour}
+          </strong>
+        </p>
       </div>
-      <div className="custom-card-details">
-        <p className="custom-card-responsible"><span>Responsável:</span> {responsible}</p>
-        <p className="custom-card-presenter"><span>Apresentador:</span> {presenter}</p>
+      <div className={PresentationCardCSS.presentationCardDetails}>
+        <p className={PresentationCardCSS.presentationCardResponsible}>
+          <strong>Responsável:</strong> {responsible}
+        </p>
+        <p className={PresentationCardCSS.presentationCardPresenter}>
+          <strong>Apresentador:</strong> {presenter}
+        </p>
       </div>
     </div>
   );
 };
 
 PresentationCard.propTypes = {
-    title: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    responsible: PropTypes.string.isRequired,
-    presenter: PropTypes.string.isRequired,
-    initialHour: PropTypes.string,
-    finalHour: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  responsible: PropTypes.string.isRequired,
+  presenter: PropTypes.string.isRequired,
+  initialHour: PropTypes.string,
+  finalHour: PropTypes.string,
 };
 
 export default PresentationCard;

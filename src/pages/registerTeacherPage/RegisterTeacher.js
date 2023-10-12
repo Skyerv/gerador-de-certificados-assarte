@@ -1,14 +1,14 @@
 import React from "react";
 import Nav from "../../components/nav/Nav";
-import CustomButton from "../../components/customButtom/CustomButton";
+import Button from "../../components/Button/Button";
 import "./RegisterTeacher.css";
 import { Link } from "react-router-dom";
 
 function RegisterTeacher() {
   return (
-    <div className="register-teacher">
+    <div className="register-teacher-container">
       <Nav />
-      <div className="register-teacher-container">
+      <div className="register-teacher-body">
         <div className="register-teacher-form">
           <h2>Cadastro de Professor</h2>
           <form>
@@ -24,7 +24,7 @@ function RegisterTeacher() {
               <label>Senha:</label>
               <input type="password" placeholder="Senha" />
             </div>
-            <CustomButton text="Cadastrar" />
+            <Button text="Cadastrar" />
           </form>
           <p>
             Já tem conta?{" "}

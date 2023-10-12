@@ -1,0 +1,27 @@
+.btn {
+  border: none;
+  border-radius: 15px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000000;
+  cursor: pointer;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover{
+  background-color: #c8e6db;
+}
+
+.btn:focus{
+  background-color: #b8dbce;
+  transform: scale(0.98);
+}
+
+.redButton {
+  background-color: #ffa7a7;
+}
+
+.greenButton {
+  background-color: #d0f4de;
+}

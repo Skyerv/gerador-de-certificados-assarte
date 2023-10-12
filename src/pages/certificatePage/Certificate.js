@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import CustomButton from "../../components/customButtom/CustomButton";
+import Button from "../../components/Button/Button";
 import Nav from "../../components/nav/Nav";
 import "./Certificate.css";
 
@@ -9,6 +9,7 @@ function Certificate() {
       <div className="certificate-top">
         <Nav />
         <img
+          className="sustentabilityImg"
           src="/images/certificateSustentabilityImage.png"
           alt="Sustentabilidade"
         />
@@ -39,7 +40,7 @@ function Certificate() {
       </div>
       <div className="downloadCertificateButton">
         <Link to="/login">
-          <CustomButton text={"Baixar Certificados"} />
+          <Button text={"Baixar Certificados"} />
         </Link>
       </div>
     </div>

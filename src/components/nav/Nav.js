@@ -1,13 +1,15 @@
-import React from 'react';
-import './Nav.css';
+import React from "react";
+import NavCSS from "./Nav.module.css";
 
 const Nav = () => {
   return (
-    <div className='navbar'>
-      <div className='nav-container'>
-        <img src="/images/ASSARTELogo.png" alt="ASSARTE logo" className='nav-image'/>
-        <h1>Feira Cultural ASSARTE 2023</h1>
-      </div>
+    <div className={NavCSS.navContainer}>
+      <h1 className={NavCSS.navTitle}>Feira Cultural ASSARTE 2023</h1>
+      <img
+        src="/images/ASSARTELogo.png"
+        alt="ASSARTE logo"
+        className={NavCSS.navImage}
+      />
     </div>
   );
 };
