@@ -19,10 +19,10 @@ function routes() {
         <Route path="/cadastrar" element={<RegisterTeacher />} />
         <Route path="/professor" element={<TeacherPage />} />
         <Route
-          path="/registerPresentation"
+          path="/cadastrar-apresentacao"
           element={<RegisterPresentation />}
         />
-        <Route path="/certificate" element={<Certificate />} />
+        <Route path="/certificado" element={<Certificate />} />
         <Route path="/cadastrar-alunos" element={<RegisterStudents />} />
         <Route
           path="/cadastrar-espectadores"
