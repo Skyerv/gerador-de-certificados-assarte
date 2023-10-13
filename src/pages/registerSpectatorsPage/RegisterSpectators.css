@@ -1,4 +1,4 @@
-.register-students-container {
+.register-spectator-container {
   padding: 10px 20%;
 }
 
@@ -7,7 +7,7 @@
   vertical-align: middle;
 }
 
-.add-student-form {
+.add-spectator-form {
   /* display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,7 +19,7 @@
   gap: 1rem;
 }
 
-.search-student-form {
+.search-spectator-form {
   display: grid;
   grid-template-columns: 5fr 1fr;
   align-items: center;
@@ -29,15 +29,15 @@
   margin-bottom: 2rem;
 }
 
-.register-student-button {
+.register-spectator-button {
   width: 200px;
 }
 
-.add-student-form label {
+.add-spectator-form label {
   width: 20rem;
 }
 
-.register-students-container button{
+.register-spectators-container button{
   width: 150px;
 }
 

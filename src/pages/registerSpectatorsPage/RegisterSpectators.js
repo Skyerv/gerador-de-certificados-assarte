@@ -6,10 +6,10 @@ import SpectatorTile from "../../components/spectatorTile/SpectatorTile";
 
 function RegisterSpectators() {
   return (
-    <div className="register-students">
+    <div className="register-spectator">
       <Nav />
-      <div className="register-students-container">
-        <div className="register-students-form">
+      <div className="register-spectator-container">
+        <div className="register-spectator-form">
           <h2>Cadastro de Espectadores</h2>
           <form>
             <div className="form-group add-student-form">
