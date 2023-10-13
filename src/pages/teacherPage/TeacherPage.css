@@ -1,5 +1,5 @@
 .teacher-page-body {
-    padding: 10px 20%;
+    padding: 10px 15%;
 }
 
 .teacher-page-body-buttons{
@@ -23,6 +23,21 @@
 .teacher-page-body-buttons button{
     margin: 10px 0px;
     width: 100%;
+}
+
+.presentation-card-with-buttons{
+    display: flex;
+}
+
+.teacher-page-body .presentation-card-div{
+    flex: 1
+}
+
+.presentation-card-buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 5px;
 }
 
 @media (max-width: 845px) {

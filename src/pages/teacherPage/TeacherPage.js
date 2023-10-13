@@ -9,9 +9,10 @@ function TeacherPage() {
     <div className="teacher-page-container">
       <Nav />
       <div className="teacher-page-body">
+        <h2>Tela do Professor</h2>
         <div className="teacher-page-body-buttons">
           <div className="buttons-column">
-            <Link to="/registerPresentation">
+            <Link to="/cadastrar-apresentacao">
               <Button text="Cadastrar Apresentação" />
             </Link>
             <Link to="/cadastrar-alunos">
@@ -26,26 +27,79 @@ function TeacherPage() {
           </div>
         </div>
 
-        <Link to="/login">
-          <PresentationCard
-            title="Titulo da Apresentação"
-            date="04/07/2023"
-            initialHour="13:00"
-            finalHour="14:00"
-            responsible="Francisco Da Silva"
-            presenter="Francisco Da Silva"
-          />
-        </Link>
-        <Link to="/login">
-          <PresentationCard
-            title="Titulo da Apresentação"
-            date="04/07/2023"
-            initialHour="13:00"
-            finalHour="14:00"
-            responsible="Francisco Da Silva"
-            presenter="Francisco Da Silva"
-          />
-        </Link>
+        <div className="presentation-card-with-buttons">
+          <div className="presentation-card-div">
+            <Link to="/cadastrar-espectadores">
+              <PresentationCard
+                title="Titulo da Apresentação"
+                date="04/07/2023"
+                initialHour="13:00"
+                finalHour="14:00"
+                responsible="Francisco Da Silva"
+                presenter="Francisco Da Silva"
+              />
+            </Link>
+          </div>
+          <div className="presentation-card-buttons">
+            <Button text="Edit" />
+            <Button text="Delete" color="red" />
+          </div>
+        </div>
+
+        <div className="presentation-card-with-buttons">
+          <div className="presentation-card-div">
+            <Link to="/cadastrar-espectadores">
+              <PresentationCard
+                title="Titulo da Apresentação"
+                date="04/07/2023"
+                initialHour="13:00"
+                finalHour="14:00"
+                responsible="Francisco Da Silva"
+                presenter="Francisco Da Silva"
+              />
+            </Link>
+          </div>
+          <div className="presentation-card-buttons">
+            <Button text="Edit" />
+            <Button text="Delete" color="red" />
+          </div>
+        </div>
+        <div className="presentation-card-with-buttons">
+          <div className="presentation-card-div">
+            <Link to="/cadastrar-espectadores">
+              <PresentationCard
+                title="Titulo da Apresentação"
+                date="04/07/2023"
+                initialHour="13:00"
+                finalHour="14:00"
+                responsible="Francisco Da Silva"
+                presenter="Francisco Da Silva"
+              />
+            </Link>
+          </div>
+          <div className="presentation-card-buttons">
+            <Button text="Edit" />
+            <Button text="Delete" color="red" />
+          </div>
+        </div>
+        <div className="presentation-card-with-buttons">
+          <div className="presentation-card-div">
+            <Link to="/cadastrar-espectadores">
+              <PresentationCard
+                title="Titulo da Apresentação"
+                date="04/07/2023"
+                initialHour="13:00"
+                finalHour="14:00"
+                responsible="Francisco Da Silva"
+                presenter="Francisco Da Silva"
+              />
+            </Link>
+          </div>
+          <div className="presentation-card-buttons">
+            <Button text="Edit" />
+            <Button text="Delete" color="red" />
+          </div>
+        </div>
       </div>
     </div>
   );
