@@ -11,6 +11,7 @@ function RegisterPresentation() {
     <div className="register-presentation-container">
       <Nav />
       <div className="register-presentation-body">
+        <h2>Cadastro de Apresentação</h2>
         <form className="formContainer">
           <div className="column">
             <div className="form-group">
