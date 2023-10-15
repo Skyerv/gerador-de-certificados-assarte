@@ -1,0 +1,19 @@
+.certificateTile {
+    display: flex;
+    background-color: #f2f2f2;
+    padding: 0rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    transition: all .2s ease-in-out;
+    align-items: center;
+}
+
+.certificateTile p{
+    margin-left: 1.5rem;
+}
+
+.certificateTile:hover {
+    background-color: #e8eef1;
+    transform: scale(1.01);
+    transition: .2s;
+}
