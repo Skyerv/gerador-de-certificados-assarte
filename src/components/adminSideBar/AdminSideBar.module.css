@@ -1,0 +1,38 @@
+.sidebar {
+  position: absolute;
+  top: 30%;
+  background-color: rgb(231, 231, 231);
+  width: 200px;
+  height: max-content;
+  padding: 10px;
+}
+
+.sidebar h4 {
+  text-align: center;
+}
+
+.sidebar ul {
+  margin-top: 50px;
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+}
+
+.sidebar a {
+  color: #01496d;
+  font-weight: bold;
+}
+
+.sidebar a.selected {
+  text-decoration: underline;
+}
+
+@media (max-width: 1074px) {
+  .sidebar {
+    position: relative;
+    margin: auto;
+  }
+}

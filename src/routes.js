@@ -9,6 +9,7 @@ import Certificate from "./pages/certificatePage/Certificate";
 import RegisterStudents from "./pages/registerStudentsPage/RegisterStudents";
 import RegisterSpectators from "./pages/registerSpectatorsPage/RegisterSpectators";
 import SearchCertificates from "./pages/searchCertificatesPage/SearchCertificates";
+import AdminInfo from "./pages/adminInfoPage/AdminInfo";
 
 function routes() {
   return (
@@ -29,6 +30,7 @@ function routes() {
           element={<RegisterSpectators />}
         />
         <Route path="/procurar-certificados" element={<SearchCertificates />} />
+        <Route path="/admin-info" element={<AdminInfo />} />
       </Routes>
     </Router>
   );

@@ -32,10 +32,12 @@ a.link {
   margin-bottom: 5px;
 }
 
-.form-group input {
-  width: 100%;
+.form-group input,
+.form-group textarea {
   padding: 16px 25px;
   border: 1px solid #797979;
   border-radius: 15px;
   box-sizing: border-box;
+  resize: none;
+  width: 100%;
 }
