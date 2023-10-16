@@ -14,10 +14,44 @@
   margin: 0;
 }
 
+.navUl {
+  position: absolute;
+  right: 80px;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+}
+
+.navUl li {
+  margin: 0px 8px;
+}
+
+.navUl a {
+  color: #01496d;
+  font-weight: bold;
+}
+
+.navUl a.selected {
+  text-decoration: underline;
+}
+
 .navTitle {
   text-align: center;
   margin: 15px;
   flex: 1;
+}
+
+@media (max-width: 1195px) {
+  .navUl {
+    position: relative;
+    left: 0;
+    margin: 0px auto;
+  }
+
+  .navImage {
+    position: relative;
+    left: 0;
+  }
 }
 
 @media (max-width: 801px) {
@@ -28,5 +62,10 @@
 
   .navImage {
     display: none;
+  }
+
+  .navUl {
+    flex-direction: column;
+    margin-top: 5px;
   }
 }
