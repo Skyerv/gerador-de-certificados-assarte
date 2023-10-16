@@ -12,34 +12,34 @@ const Nav = () => {
         alt="ASSARTE logo"
         className={NavCSS.navImage}
       />
-
       <h1 className={NavCSS.navTitle}>Feira Cultural ASSARTE</h1>
-
-      <ul className={NavCSS.navUl}>
-        <li>
-          <Link to="/" className={pathname === "/" ? NavCSS.selected : ""}>
-            Página Inicial
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/procurar-certificados"
-            className={
-              pathname === "/procurar-certificados" ? NavCSS.selected : ""
-            }
-          >
-            Certificados
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/login"
-            className={pathname === "/login" ? NavCSS.selected : ""}
-          >
-            Sou Professor
-          </Link>
-        </li>
-      </ul>
+      {pathname !== "/certificado" ? (
+        <ul className={NavCSS.navUl}>
+          <li>
+            <Link to="/" className={pathname === "/" ? NavCSS.selected : ""}>
+              Página Inicial
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/procurar-certificados"
+              className={
+                pathname === "/procurar-certificados" ? NavCSS.selected : ""
+              }
+            >
+              Certificados
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/login"
+              className={pathname === "/login" ? NavCSS.selected : ""}
+            >
+              Sou Professor
+            </Link>
+          </li>
+        </ul>
+      ) : null}
     </div>
   );
 };
