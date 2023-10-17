@@ -1,10 +1,42 @@
 import Nav from "../../components/nav/Nav";
 import Button from "../../components/Button/Button";
 import "./TeacherPage.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PresentationCard from "../../components/presentationCard/PresentationCard";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
 
 function TeacherPage() {
+  const [authUser, setAuthUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const auth = getAuth();
+
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthUser(user);
+      } else {
+        setAuthUser(null);
+      }
+      setLoading(false);
+    });
+
+    return () => {
+      listen();
+    };
+  }, [auth]);
+
+  useEffect(() => {
+    if (!authUser && !loading) {
+      navigate("/login");
+    }
+  }, [authUser, loading, navigate]);
+  
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="teacher-page-container">
       <Nav />
