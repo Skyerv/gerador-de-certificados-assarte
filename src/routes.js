@@ -10,6 +10,7 @@ import RegisterStudents from "./pages/registerStudentsPage/RegisterStudents";
 import RegisterSpectators from "./pages/registerSpectatorsPage/RegisterSpectators";
 import SearchCertificates from "./pages/searchCertificatesPage/SearchCertificates";
 import AdminInfo from "./pages/adminInfoPage/AdminInfo";
+import ProtectedRoute from "./components/protectedRoute/protectedRoute";
 
 function routes() {
   return (
@@ -18,19 +19,48 @@ function routes() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastrar" element={<RegisterTeacher />} />
-        <Route path="/professor" element={<TeacherPage />} />
+        <Route path="/certificado" element={<Certificate />} />
+        <Route path="/procurar-certificados" element={<SearchCertificates />} />
+        <Route
+          path="/professor"
+          element={
+            <ProtectedRoute>
+              <TeacherPage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/cadastrar-apresentacao"
-          element={<RegisterPresentation />}
+          element={
+            <ProtectedRoute>
+              <RegisterPresentation />
+            </ProtectedRoute>
+          }
         />
-        <Route path="/certificado" element={<Certificate />} />
-        <Route path="/cadastrar-alunos" element={<RegisterStudents />} />
+        <Route
+          path="/cadastrar-alunos"
+          element={
+            <ProtectedRoute>
+              <RegisterStudents />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/cadastrar-espectadores"
-          element={<RegisterSpectators />}
+          element={
+            <ProtectedRoute>
+              <RegisterSpectators />
+            </ProtectedRoute>
+          }
         />
-        <Route path="/procurar-certificados" element={<SearchCertificates />} />
-        <Route path="/admin-info" element={<AdminInfo />} />
+        <Route
+          path="/admin-info"
+          element={
+            <ProtectedRoute>
+              <AdminInfo />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

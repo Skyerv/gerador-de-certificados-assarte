@@ -1,30 +1,84 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Nav from "../../components/nav/Nav";
 import Button from "../../components/Button/Button";
 import "./RegisterTeacher.css";
-import { Link } from "react-router-dom";
+import AuthService from "../../services/AuthService";
+
+const authService = new AuthService();
 
 function RegisterTeacher() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    if (!name || !email || !password) {
+      setError("Preencha todos os campos corretamente.");
+      return;
+    }
+
+    try {
+      await authService.signUp(email, password);
+      navigate("/professor");
+    } catch (error) {
+      const errorCode = error.code;
+      setError(registerTeacherErrorMessage(errorCode));
+    }
+  };
+
+  const registerTeacherErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case "auth/invalid-email":
+        return "Email inválido";
+      case "auth/missing-password":
+        return "Faltou colocar a senha";
+      case "auth/email-already-in-use":
+        return "Email já está em uso";
+      default:
+        return "Erro inesperado";
+    }
+  };
+
   return (
     <div className="register-teacher-container">
       <Nav />
       <div className="register-teacher-body">
         <div className="register-teacher-form">
           <h2>Cadastro de Professor</h2>
-          <form>
+          <form onSubmit={handleSignUp}>
             <div className="form-group">
               <label>Nome:</label>
-              <input type="text" placeholder="Nome" />
+              <input
+                type="text"
+                placeholder="Nome"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
             <div className="form-group">
               <label>Email:</label>
-              <input type="email" placeholder="Email" />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className="form-group">
               <label>Senha:</label>
-              <input type="password" placeholder="Senha" />
+              <input
+                type="password"
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
-            <Button text="Cadastrar" />
+            <Button text="Cadastrar" type="submit" />
+            {error && <p className="error">{error}</p>}
           </form>
           <p>
             Já tem conta?{" "}

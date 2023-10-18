@@ -1,10 +1,24 @@
 import Nav from "../../components/nav/Nav";
 import Button from "../../components/Button/Button";
 import "./TeacherPage.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PresentationCard from "../../components/presentationCard/PresentationCard";
+import AuthService from "../../services/AuthService";
+
+const authService = new AuthService();
 
 function TeacherPage() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await authService.signOut();
+      navigate("/login");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
   return (
     <div className="teacher-page-container">
       <Nav />
@@ -22,7 +36,7 @@ function TeacherPage() {
 
           <div className="logout-button">
             <Link to="/login">
-              <Button text="Logout" color="red" />
+              <Button text="Logout" color="red" onClick={handleLogout} />
             </Link>
           </div>
         </div>
