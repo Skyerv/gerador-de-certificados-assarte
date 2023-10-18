@@ -3,39 +3,20 @@ import Button from "../../components/Button/Button";
 import "./TeacherPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import PresentationCard from "../../components/presentationCard/PresentationCard";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { getAuth, signOut } from "firebase/auth";
 
 function TeacherPage() {
-  const [authUser, setAuthUser] = useState(null);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const auth = getAuth();
 
-  useEffect(() => {
-    const listen = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setAuthUser(user);
-      } else {
-        setAuthUser(null);
-      }
-      setLoading(false);
-    });
-
-    return () => {
-      listen();
-    };
-  }, [auth]);
-
-  useEffect(() => {
-    if (!authUser && !loading) {
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
       navigate("/login");
+    } catch (error) {
+      console.error("Error logging out:", error);
     }
-  }, [authUser, loading, navigate]);
-  
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  };
 
   return (
     <div className="teacher-page-container">
@@ -54,7 +35,7 @@ function TeacherPage() {
 
           <div className="logout-button">
             <Link to="/login">
-              <Button text="Logout" color="red" />
+              <Button text="Logout" color="red" onClick={handleLogout}/>
             </Link>
           </div>
         </div>
