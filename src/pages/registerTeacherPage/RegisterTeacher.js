@@ -1,51 +1,45 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Nav from "../../components/nav/Nav";
 import Button from "../../components/Button/Button";
 import "./RegisterTeacher.css";
-import { Link } from "react-router-dom";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import AuthService from "../../services/AuthService";
+
+const authService = new AuthService();
 
 function RegisterTeacher() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const signUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    const auth = getAuth();
-    if (name === "") {
-      setError("Nome inválido");
-    } else {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential;
-          console.log(user)
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(error);
-          console.log(errorCode);
-          console.log(errorMessage);
+    if (!name || !email || !password) {
+      setError("Preencha todos os campos corretamente.");
+      return;
+    }
 
-          switch (errorCode) {
-            case "auth/invalid-email":
-              setError("Email inválido");
-              break;
-            case "auth/missing-password":
-              setError("Faltou colocar a senha");
-              break;
-            case "auth/invalid-login-credentials":
-              setError("Email ou senha inválido");
-              break;
-            case "auth/email-already-in-use":
-              setError("Email já está em uso");
-              break;
-            default:
-              setError("Erro inesperado");
-          }
-        });
+    try {
+      await authService.signUp(email, password);
+      navigate("/professor");
+    } catch (error) {
+      const errorCode = error.code;
+      setError(registerTeacherErrorMessage(errorCode));
+    }
+  };
+
+  const registerTeacherErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case "auth/invalid-email":
+        return "Email inválido";
+      case "auth/missing-password":
+        return "Faltou colocar a senha";
+      case "auth/email-already-in-use":
+        return "Email já está em uso";
+      default:
+        return "Erro inesperado";
     }
   };
 
@@ -55,12 +49,13 @@ function RegisterTeacher() {
       <div className="register-teacher-body">
         <div className="register-teacher-form">
           <h2>Cadastro de Professor</h2>
-          <form onSubmit={signUp}>
+          <form onSubmit={handleSignUp}>
             <div className="form-group">
               <label>Nome:</label>
               <input
                 type="text"
                 placeholder="Nome"
+                value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
@@ -69,6 +64,7 @@ function RegisterTeacher() {
               <input
                 type="email"
                 placeholder="Email"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -77,11 +73,12 @@ function RegisterTeacher() {
               <input
                 type="password"
                 placeholder="Senha"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <Button text="Cadastrar" type="submit" />
-            {error ? <p className="error">{error}</p> : null}
+            {error && <p className="error">{error}</p>}
           </form>
           <p>
             Já tem conta?{" "}

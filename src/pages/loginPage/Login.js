@@ -1,62 +1,47 @@
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Nav from "../../components/nav/Nav";
 import Button from "../../components/Button/Button";
+import AuthService from "../../services/AuthService.js";
 import "./Login.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../FirebaseConfiguration.js";
+
+const authService = new AuthService();
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState();
-  const [authUser, setAuthUser] = useState(null);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const login = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-      setAuthUser(user);
-      console.log(authUser);
+      await authService.signIn(email, password);
       navigate("/professor");
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error(errorCode, errorMessage);
+      setError(loginErrorMessage(error.code));
+    }
+  };
 
-      switch (errorCode) {
-        case "auth/invalid-email":
-          setError("Email inválido");
-          break;
-        case "auth/wrong-password":
-          setError("Senha inválida");
-          break;
-        case "auth/missing-password":
-          setError("Faltou colocar a senha");
-          break;
-        default:
-          setError("Email ou senha inválido");
-      }
+  const loginErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case "auth/invalid-email":
+        return "Email inválido";
+      case "auth/wrong-password":
+        return "Senha inválida";
+      case "auth/missing-password":
+        return "Faltou colocar a senha";
+      default:
+        return "Email ou senha inválido";
     }
   };
 
   useEffect(() => {
     const checkAutoLogin = async () => {
+      const isUserLoggedIn = await authService.checkLogin();
       try {
-        const user = await auth.onAuthStateChanged((user) => {
-          if (user) {
-            setAuthUser(user);
-            navigate("/professor");
-          }
-        });
-        if (!user) {
-          setError(null);
+        if (isUserLoggedIn) {
+          navigate("/professor");
         }
       } catch (error) {
         console.error("Auto login error:", error);
@@ -72,12 +57,13 @@ function Login() {
       <div className="login-body">
         <div className="login-form">
           <h2>Login</h2>
-          <form onSubmit={login}>
+          <form onSubmit={handleLogin}>
             <div className="form-group">
               <label>Email:</label>
               <input
                 type="email"
                 placeholder="Email"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -86,11 +72,12 @@ function Login() {
               <input
                 type="password"
                 placeholder="Password"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <Button text="Logar" type="submit" />
-            {error ? <p className="error">{error}</p> : null}
+            {error && <p className="error">{error}</p>}
           </form>
           <p>
             Não tem conta?{" "}

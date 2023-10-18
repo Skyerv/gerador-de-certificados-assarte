@@ -3,15 +3,16 @@ import Button from "../../components/Button/Button";
 import "./TeacherPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import PresentationCard from "../../components/presentationCard/PresentationCard";
-import { getAuth, signOut } from "firebase/auth";
+import AuthService from "../../services/AuthService";
+
+const authService = new AuthService();
 
 function TeacherPage() {
   const navigate = useNavigate();
-  const auth = getAuth();
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
+      await authService.signOut();
       navigate("/login");
     } catch (error) {
       console.error("Error logging out:", error);
@@ -35,7 +36,7 @@ function TeacherPage() {
 
           <div className="logout-button">
             <Link to="/login">
-              <Button text="Logout" color="red" onClick={handleLogout}/>
+              <Button text="Logout" color="red" onClick={handleLogout} />
             </Link>
           </div>
         </div>
