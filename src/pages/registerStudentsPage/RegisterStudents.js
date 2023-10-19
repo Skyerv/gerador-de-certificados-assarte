@@ -1,10 +1,22 @@
-import React from "react";
 import Nav from "../../components/nav/Nav";
 import "./RegisterStudents.css";
 import Button from "../../components/Button/Button";
 import StudentTile from "../../components/studentTile/StudentTile";
+import StudentController from "../../controllers/StudentController";
 
 function RegisterStudents() {
+  const {
+    studentName,
+    setStudentName,
+    students,
+    searchQuery,
+    setSearchQuery,
+    handleAddStudent,
+    handleDeleteStudent,
+    handleEditStudent,
+    handleSearch,
+  } = StudentController();
+
   return (
     <div className="register-students-container">
       <Nav />
@@ -14,22 +26,36 @@ function RegisterStudents() {
           <form>
             <div className="form-group add-student-form">
               <span>Nome do aluno:</span>
-              <input type="text" placeholder="Nome do aluno" />
-              <Button text="Adicionar"/>
+              <input
+                type="text"
+                placeholder="Nome do aluno"
+                value={studentName}
+                onChange={(e) => setStudentName(e.target.value)}
+              />
+              <Button text="Adicionar" onClick={handleAddStudent} />
             </div>
             <div className="form-group search-student-form">
-              <input type="text" placeholder="Pesquisar aluno" />
-              <Button text="Buscar"/>
+              <input
+                type="text"
+                placeholder="Pesquisar aluno"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Button text="Buscar" onClick={handleSearch} />
             </div>
           </form>
         </div>
-        <StudentTile name="Rodrigo Edinael Silveira" />
-        <StudentTile name="Rodrigo Edinael Silveira" />
-        <StudentTile name="Rodrigo Edinael Silveira" />
-        <StudentTile name="Rodrigo Edinael Silveira" />
-        <StudentTile name="Rodrigo Edinael Silveira" />
-        <StudentTile name="Rodrigo Edinael Silveira" />
-        <StudentTile name="Rodrigo Edinael Silveira" />
+        <div className="student-tiles-container">
+          {students.map((student) => (
+            <StudentTile
+              key={student.id}
+              id={student.id}
+              name={student.name}
+              onDelete={handleDeleteStudent}
+              onEdit={handleEditStudent}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -4,10 +4,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { app } from "../FirebaseConfiguration";
+import { appAuth } from "../FirebaseConfiguration";
 
 class AuthService {
-  appAuth = getAuth(app);
   auth = getAuth();
 
   async signIn(email, password) {
@@ -24,7 +23,7 @@ class AuthService {
 
   async checkLogin() {
     return new Promise((resolve) => {
-      this.appAuth.onAuthStateChanged((user) => {
+      appAuth.onAuthStateChanged((user) => {
         if (user) {
           resolve(true);
         } else {
