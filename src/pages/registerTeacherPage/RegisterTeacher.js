@@ -3,29 +3,38 @@ import { Link, useNavigate } from "react-router-dom";
 import Nav from "../../components/nav/Nav";
 import Button from "../../components/Button/Button";
 import "./RegisterTeacher.css";
-import AuthService from "../../services/AuthService";
-
-const authService = new AuthService();
+import TeacherController from "../../controllers/TeacherController";
+import Teacher from "../../entities/Teacher";
 
 function RegisterTeacher() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const {
+    name,
+    setName,
+    email,
+    setEmail,
+    handleAddTeacher,
+    handleSignUpTeacher,
+  } = TeacherController();
+
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    if (!name || !email || !password) {
+    if (!name || !setName || !password) {
       setError("Preencha todos os campos corretamente.");
       return;
     }
 
     try {
-      await authService.signUp(email, password);
+      await handleSignUpTeacher(email, password);
+      const teacher = new Teacher(name, email);
+      await handleAddTeacher(teacher);
       navigate("/professor");
     } catch (error) {
       const errorCode = error.code;
+      console.log(error);
       setError(registerTeacherErrorMessage(errorCode));
     }
   };

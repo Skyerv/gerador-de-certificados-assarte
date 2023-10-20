@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "../../components/nav/Nav";
 import Button from "../../components/Button/Button";
-import AuthService from "../../services/AuthService.js";
 import "./Login.css";
-
-const authService = new AuthService();
+import TeacherController from "../../controllers/TeacherController";
 
 function Login() {
-  const [email, setEmail] = useState("");
+  const {
+    email,
+    setEmail,
+    handleSignInTeacher,
+    handleAutoLoginTeacher,
+  } = TeacherController();
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -16,7 +19,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await authService.signIn(email, password);
+      await handleSignInTeacher(email, password);
       navigate("/professor");
     } catch (error) {
       setError(loginErrorMessage(error.code));
@@ -38,7 +41,7 @@ function Login() {
 
   useEffect(() => {
     const checkAutoLogin = async () => {
-      const isUserLoggedIn = await authService.checkLogin();
+      const isUserLoggedIn = await handleAutoLoginTeacher();
       try {
         if (isUserLoggedIn) {
           navigate("/professor");
@@ -49,7 +52,7 @@ function Login() {
     };
 
     checkAutoLogin();
-  }, [navigate]);
+  }, [handleAutoLoginTeacher, navigate]);
 
   return (
     <div className="login-container">
