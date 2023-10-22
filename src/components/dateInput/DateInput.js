@@ -1,41 +1,30 @@
-import React, { Component } from 'react';
+import React from "react";
 
-class DateInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dateValue: '',
-    };
-    this.inputRef = React.createRef();
-  }
-
-  handleDateChange = (e) => {
+const DateInput = ({ value, onChange }) => {
+  const handleDateChange = (e) => {
     let inputDate = e.target.value;
 
-    inputDate = inputDate.replace(/\D/g, '').slice(0, 8);
+    inputDate = inputDate.replace(/\D/g, "").slice(0, 8);
 
-    let formattedDate = '';
+    let formattedDate = "";
     for (let i = 0; i < inputDate.length; i++) {
       if (i === 2 || i === 4) {
-        formattedDate += '/';
+        formattedDate += "/";
       }
       formattedDate += inputDate[i];
     }
-    this.setState({ dateValue: formattedDate });
-    this.inputRef.current.selectionEnd = this.inputRef.current.selectionStart = formattedDate.length;
+
+    onChange(formattedDate);
   };
 
-  render() {
-    return (
-      <input
-        type="text"
-        placeholder="DD/MM/YYYY"
-        value={this.state.dateValue}
-        onChange={this.handleDateChange}
-        ref={this.inputRef}
-      />
-    );
-  }
-}
+  return (
+    <input
+      type="text"
+      placeholder="DD/MM/YYYY"
+      value={value}
+      onChange={handleDateChange}
+    />
+  );
+};
 
 export default DateInput;
