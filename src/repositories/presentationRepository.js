@@ -3,6 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   updateDoc,
 } from "firebase/firestore";
@@ -24,7 +25,10 @@ class PresentationRepository {
   }
 
   async update(presentationId, updatedData) {
-    await updateDoc(doc(db, "presentations", presentationId), updatedData);
+    await updateDoc(
+      doc(db, "presentations", presentationId),
+      updatedData.toMap()
+    );
     console.log("Document updated with ID: ", presentationId);
   }
 
@@ -45,6 +49,29 @@ class PresentationRepository {
       presentations.push(presentation);
     });
     return presentations;
+  }
+
+  async fetchPresentationById(presentationId) {
+    var presentation;
+    const presentationRef = doc(db, "presentations", presentationId);
+    const docSnapshot = await getDoc(presentationRef);
+
+    if (docSnapshot.exists()) {
+      const presentationData = docSnapshot.data();
+      presentation = new Presentation(
+        docSnapshot.id,
+        presentationData.title,
+        presentationData.day,
+        presentationData.startTime,
+        presentationData.endTime,
+        presentationData.presenter,
+        presentationData.responsible
+      );
+    } else {
+      console.log("Document does not exist");
+    }
+
+    return presentation;
   }
 }
 

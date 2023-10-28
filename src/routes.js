@@ -38,6 +38,14 @@ function routes() {
           }
         />
         <Route
+          path="/editar-apresentacao/:presentationId"
+          element={
+            <ProtectedRoute>
+              <RegisterPresentation />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/cadastrar-alunos"
           element={
             <ProtectedRoute>

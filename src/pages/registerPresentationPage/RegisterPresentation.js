@@ -1,4 +1,3 @@
-import React from "react";
 import Nav from "../../components//nav/Nav";
 import DateInput from "../../components/dateInput/DateInput";
 import TimeInput from "../../components/timeInput/TimeInput";
@@ -6,6 +5,8 @@ import Button from "../../components/Button/Button";
 import PresentationController from "../../controllers/PresentationController";
 
 import "./RegisterPresentation.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 function RegisterPresentation() {
   const {
@@ -22,14 +23,37 @@ function RegisterPresentation() {
     responsibleName,
     setResponsibleName,
     handleAddPresentation,
+    handleEditPresentation,
+    fetchPresentationData,
   } = PresentationController();
+
+  const navigate = useNavigate();
+  const { presentationId } = useParams();
+
+  useEffect(() => {
+    if (presentationId) {
+      fetchPresentationData(presentationId);
+    }
+  });
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    if (presentationId) {
+      await handleEditPresentation(presentationId);
+      navigate("/professor");
+    } else {
+      handleAddPresentation();
+    }
+  };
 
   return (
     <div className="register-presentation-container">
       <Nav />
       <div className="register-presentation-body">
-        <h2>Cadastro de Apresentação</h2>
-        <form className="formContainer" >
+        <h2>
+          {presentationId ? "Editar Apresentação" : "Cadastro de Apresentação"}
+        </h2>
+        <form className="formContainer" onSubmit={handleFormSubmit}>
           <div className="column">
             <div className="form-group">
               <label>Título:</label>
@@ -75,7 +99,14 @@ function RegisterPresentation() {
                 onChange={(e) => setResponsibleName(e.target.value)}
               />
             </div>
-            <Button text="Cadastrar Apresentação" onClick={handleAddPresentation} />
+            <Button
+              text={
+                presentationId
+                  ? "Editar Apresentação"
+                  : "Cadastrar Apresentação"
+              }
+              type="submit"
+            />
           </div>
         </form>
       </div>

@@ -4,10 +4,13 @@ import "./TeacherPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import PresentationCard from "../../components/presentationCard/PresentationCard";
 import AuthService from "../../services/AuthService";
+import PresentationController from "../../controllers/PresentationController";
 
 const authService = new AuthService();
 
 function TeacherPage() {
+  const { presentations, handleDeletePresentation, setIsEditing } =
+    PresentationController();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -17,6 +20,10 @@ function TeacherPage() {
     } catch (error) {
       console.error("Error logging out:", error);
     }
+  };
+
+  const handleEditPresentation = (presentationId) => {
+    navigate(`/editar-apresentacao/${presentationId}`);
   };
 
   return (
@@ -41,79 +48,35 @@ function TeacherPage() {
           </div>
         </div>
 
-        <div className="presentation-card-with-buttons">
-          <div className="presentation-card-div">
-            <Link to="/cadastrar-espectadores">
-              <PresentationCard
-                title="Titulo da Apresentação"
-                date="04/07/2023"
-                initialHour="13:00"
-                finalHour="14:00"
-                responsible="Francisco Da Silva"
-                presenter="Francisco Da Silva"
+        {presentations.map((presentation) => (
+          <div className="presentation-card-with-buttons" key={presentation.id}>
+            <div className="presentation-card-div">
+              <Link to="/cadastrar-espectadores">
+                <PresentationCard
+                  title={presentation.title}
+                  date={presentation.day}
+                  initialHour={presentation.startTime}
+                  finalHour={presentation.endTime}
+                  responsible={presentation.responsible}
+                  presenter={presentation.presenter}
+                />
+              </Link>
+            </div>
+            <div className="presentation-card-buttons">
+              <Button
+                text="Editar"
+                onClick={() => {
+                  handleEditPresentation(presentation.id);
+                }}
               />
-            </Link>
-          </div>
-          <div className="presentation-card-buttons">
-            <Button text="Edit" />
-            <Button text="Delete" color="red" />
-          </div>
-        </div>
-
-        <div className="presentation-card-with-buttons">
-          <div className="presentation-card-div">
-            <Link to="/cadastrar-espectadores">
-              <PresentationCard
-                title="Titulo da Apresentação"
-                date="04/07/2023"
-                initialHour="13:00"
-                finalHour="14:00"
-                responsible="Francisco Da Silva"
-                presenter="Francisco Da Silva"
+              <Button
+                text="Deletar"
+                color="red"
+                onClick={() => handleDeletePresentation(presentation.id)}
               />
-            </Link>
+            </div>
           </div>
-          <div className="presentation-card-buttons">
-            <Button text="Edit" />
-            <Button text="Delete" color="red" />
-          </div>
-        </div>
-        <div className="presentation-card-with-buttons">
-          <div className="presentation-card-div">
-            <Link to="/cadastrar-espectadores">
-              <PresentationCard
-                title="Titulo da Apresentação"
-                date="04/07/2023"
-                initialHour="13:00"
-                finalHour="14:00"
-                responsible="Francisco Da Silva"
-                presenter="Francisco Da Silva"
-              />
-            </Link>
-          </div>
-          <div className="presentation-card-buttons">
-            <Button text="Edit" />
-            <Button text="Delete" color="red" />
-          </div>
-        </div>
-        <div className="presentation-card-with-buttons">
-          <div className="presentation-card-div">
-            <Link to="/cadastrar-espectadores">
-              <PresentationCard
-                title="Titulo da Apresentação"
-                date="04/07/2023"
-                initialHour="13:00"
-                finalHour="14:00"
-                responsible="Francisco Da Silva"
-                presenter="Francisco Da Silva"
-              />
-            </Link>
-          </div>
-          <div className="presentation-card-buttons">
-            <Button text="Edit" />
-            <Button text="Delete" color="red" />
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

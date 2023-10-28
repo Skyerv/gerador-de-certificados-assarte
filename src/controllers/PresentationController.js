@@ -11,6 +11,7 @@ const PresentationController = () => {
   const [responsibleName, setResponsibleName] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [presentations, setPresentations] = useState([]);
+  let previousPresentation;
 
   const presentationRepo = useMemo(() => new PresentationRepository(), []);
 
@@ -34,12 +35,7 @@ const PresentationController = () => {
       );
 
       await presentationRepo.add(newPresentation);
-      setTitle("");
-      setDay("");
-      setStartTime("");
-      setEndTime("");
-      setPresenterName("");
-      setResponsibleName("");
+      resetForm();
       fetchPresentations();
 
       return "Apresentação realizada com sucesso";
@@ -48,17 +44,27 @@ const PresentationController = () => {
     }
   };
 
+  const handleEditPresentation = async (presentationId) => {
+    if (presentationId) {
+      const updatedPresentation = new Presentation(
+        presentationId,
+        title,
+        day,
+        startTime,
+        endTime,
+        presenterName,
+        responsibleName
+      );
+
+      await presentationRepo.update(presentationId, updatedPresentation);
+      resetForm();
+      fetchPresentations();
+    }
+  };
+
   const handleDeletePresentation = async (presentationId) => {
     await presentationRepo.delete(presentationId);
     fetchPresentations();
-  };
-
-  const handleEditPresentation = async (presentationId, currentTitle) => {
-    const newTitle = prompt("Edit presentation title:", currentTitle);
-    if (newTitle !== null) {
-      await presentationRepo.update(presentationId, { title: newTitle });
-      fetchPresentations();
-    }
   };
 
   const fetchPresentations = useCallback(async () => {
@@ -70,7 +76,34 @@ const PresentationController = () => {
     fetchPresentations();
   }, [fetchPresentations]);
 
+  const resetForm = () => {
+    setTitle("");
+    setDay("");
+    setStartTime("");
+    setEndTime("");
+    setPresenterName("");
+    setResponsibleName("");
+  };
+
+  const fetchPresentationData = async (presentationId) => {
+    try {
+      const presentationData = await presentationRepo.fetchPresentationById(
+        presentationId
+      );
+
+      setTitle(presentationData.title);
+      setDay(presentationData.day);
+      setStartTime(presentationData.startTime);
+      setEndTime(presentationData.endTime);
+      setPresenterName(presentationData.presenter);
+      setResponsibleName(presentationData.responsible);
+    } catch (error) {
+      console.error("Error fetching presentation data:", error);
+    }
+  };
+
   return {
+    previousPresentation,
     title,
     setTitle,
     day,
@@ -87,8 +120,9 @@ const PresentationController = () => {
     setSearchQuery,
     presentations,
     handleAddPresentation,
-    handleDeletePresentation,
     handleEditPresentation,
+    handleDeletePresentation,
+    fetchPresentationData,
   };
 };
 
