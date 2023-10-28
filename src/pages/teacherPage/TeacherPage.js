@@ -9,8 +9,7 @@ import PresentationController from "../../controllers/PresentationController";
 const authService = new AuthService();
 
 function TeacherPage() {
-  const { presentations, handleDeletePresentation, setIsEditing } =
-    PresentationController();
+  const { presentations, handleDeletePresentation } = PresentationController();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
