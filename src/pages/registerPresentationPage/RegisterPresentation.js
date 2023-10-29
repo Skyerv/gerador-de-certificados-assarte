@@ -34,7 +34,8 @@ function RegisterPresentation() {
     if (presentationId) {
       fetchPresentationData(presentationId);
     }
-  });
+    // eslint-disable-next-line
+  }, []);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
