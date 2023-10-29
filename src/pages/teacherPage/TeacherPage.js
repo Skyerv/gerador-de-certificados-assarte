@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PresentationCard from "../../components/presentationCard/PresentationCard";
 import AuthService from "../../services/AuthService";
 import PresentationController from "../../controllers/PresentationController";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 const authService = new AuthService();
 
@@ -58,16 +59,15 @@ function TeacherPage() {
               </Link>
             </div>
             <div className="presentation-card-buttons">
-              <Button
-                text="Editar"
-                onClick={() => {
-                  navigate(`/editar-apresentacao/${presentation.id}`);
-                }}
+              <FaEdit
+                onClick={() =>
+                  navigate(`/editar-apresentacao/${presentation.id}`)
+                }
+                className="editIcon"
               />
-              <Button
-                text="Deletar"
-                color="red"
+              <FaTrash
                 onClick={() => handleDeletePresentation(presentation.id)}
+                className="deleteIcon"
               />
             </div>
           </div>

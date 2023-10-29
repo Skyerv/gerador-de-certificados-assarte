@@ -1,53 +1,76 @@
 .teacher-page-body {
-    padding: 10px 15%;
+  padding: 10px 15%;
 }
 
-.teacher-page-body-buttons{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+.teacher-page-body-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .teacher-page-body .buttons-column {
-    width: 50%;
-    max-width: 250px;
-    margin: 30px 0px;
+  width: 50%;
+  max-width: 250px;
+  margin: 30px 0px;
 }
 
 .teacher-page-body .logout-button {
-    width: 50%;
-    max-width: 250px;
-    margin: 30px 0px;
+  width: 50%;
+  max-width: 250px;
+  margin: 30px 0px;
 }
 
-.teacher-page-body-buttons button{
-    margin: 10px 0px;
-    width: 100%;
+.teacher-page-body-buttons button {
+  margin: 10px 0px;
+  width: 100%;
 }
 
-.presentation-card-with-buttons{
-    display: flex;
+.presentation-card-with-buttons {
+  display: flex;
 }
 
-.teacher-page-body .presentation-card-div{
-    flex: 1
+.teacher-page-body .presentation-card-div {
+  flex: 1;
 }
 
-.presentation-card-buttons{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin-left: 5px;
+.presentation-card-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: 5px;
+}
+
+.presentation-card-buttons .deleteIcon {
+  margin-right: 10px;
+}
+
+.presentation-card-buttons .editIcon {
+  margin-right: 10px;
+}
+
+.presentation-card-buttons .deleteIcon:hover {
+  color: #fc6e6e;
+  transform: scale(1.01);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.presentation-card-buttons .editIcon:hover {
+  color: #599b53;
+  transform: scale(1.01);
+  transition: 0.2s;
+  cursor: pointer;
 }
 
 @media (max-width: 845px) {
-    .teacher-page-body-buttons {
-      flex-direction: column;
-      align-items: center;
-    }
+  .teacher-page-body-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .teacher-page-body .buttons-column, .teacher-page-body .logout-button {
-        width: 100%;
-        margin: 0px 0px;
-    }
+  .teacher-page-body .buttons-column,
+  .teacher-page-body .logout-button {
+    width: 100%;
+    margin: 0px 0px;
+  }
 }
