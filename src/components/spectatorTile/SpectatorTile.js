@@ -1,21 +1,34 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import SpectTileCSS from "./SpectatorTile.module.css";
+import StudentController from "../../controllers/StudentController";
 
-const StudentTile = ({ name }) => {
+const StudentTile = ({ student, presentationId, isWatched }) => {
+  const { registerWatchedPresentations, removeWatchedPresentation } =
+    StudentController();
+  const [isChecked, setIsChecked] = useState(isWatched);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+    if (isChecked) {
+      removeWatchedPresentation(student.id, presentationId);
+    } else {
+      registerWatchedPresentations(student.id, presentationId);
+    }
+  };
+
   return (
     <div className={SpectTileCSS.spectatorTile}>
-      <h4 className={SpectTileCSS.spectatorTitle}>{name}</h4>
+      <h4 className={SpectTileCSS.spectatorTitle}>{student.name}</h4>
       <label className={SpectTileCSS.container}>
-        <input type="checkbox"></input>
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleCheckboxChange}
+        />
         <span className={SpectTileCSS.checkmark}></span>
       </label>
     </div>
   );
-};
-
-StudentTile.propTypes = {
-  name: PropTypes.string.isRequired,
 };
 
 export default StudentTile;

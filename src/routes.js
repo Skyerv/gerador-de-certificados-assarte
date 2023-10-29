@@ -54,7 +54,7 @@ function routes() {
           }
         />
         <Route
-          path="/cadastrar-espectadores"
+          path="/cadastrar-espectadores/:presentationId"
           element={
             <ProtectedRoute>
               <RegisterSpectators />

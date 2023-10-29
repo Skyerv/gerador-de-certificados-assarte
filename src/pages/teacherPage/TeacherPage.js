@@ -21,10 +21,6 @@ function TeacherPage() {
     }
   };
 
-  const handleEditPresentation = (presentationId) => {
-    navigate(`/editar-apresentacao/${presentationId}`);
-  };
-
   return (
     <div className="teacher-page-container">
       <Nav />
@@ -50,7 +46,7 @@ function TeacherPage() {
         {presentations.map((presentation) => (
           <div className="presentation-card-with-buttons" key={presentation.id}>
             <div className="presentation-card-div">
-              <Link to="/cadastrar-espectadores">
+              <Link to={`/cadastrar-espectadores/${presentation.id}`}>
                 <PresentationCard
                   title={presentation.title}
                   date={presentation.day}
@@ -65,7 +61,7 @@ function TeacherPage() {
               <Button
                 text="Editar"
                 onClick={() => {
-                  handleEditPresentation(presentation.id);
+                  navigate(`/editar-apresentacao/${presentation.id}`);
                 }}
               />
               <Button

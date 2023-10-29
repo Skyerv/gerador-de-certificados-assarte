@@ -47,6 +47,16 @@ const StudentController = () => {
     fetchStudents();
   };
 
+  const registerWatchedPresentations = async (studentId, presentationId) => {
+    const studentRepo = new StudentRepository();
+    await studentRepo.registerWatchedPresentations(studentId, presentationId);
+  };
+
+  const removeWatchedPresentation = async (studentId, presentationId) => {
+    const studentRepo = new StudentRepository();
+    await studentRepo.removeWatchedPresentation(studentId, presentationId);
+  };
+
   return {
     studentName,
     setStudentName,
@@ -57,6 +67,8 @@ const StudentController = () => {
     handleDeleteStudent,
     handleEditStudent,
     handleSearch,
+    registerWatchedPresentations,
+    removeWatchedPresentation,
   };
 };
 

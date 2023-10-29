@@ -1,4 +1,13 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  arrayRemove,
+  arrayUnion,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../FirebaseConfiguration";
 import Student from "../entities/Student";
 
@@ -25,10 +34,32 @@ class StudentRepository {
     const querySnapshot = await getDocs(collection(db, "students"));
     querySnapshot.forEach((doc) => {
       const studentData = doc.data();
-      const student = new Student(doc.id, studentData.name);
+      const student = new Student(
+        doc.id,
+        studentData.name,
+        studentData.watchedPresentations
+      );
       students.push(student);
     });
     return students;
+  }
+
+  async registerWatchedPresentations(studentId, presentationId) {
+    const studentRef = doc(db, "students", studentId);
+
+    await updateDoc(studentRef, {
+      watchedPresentations: arrayUnion(presentationId),
+    });
+    console.log(
+      `Presentation ${presentationId} added to watchedPresentations for student ${studentId}`
+    );
+  }
+
+  async removeWatchedPresentation(studentId, presentationId) {
+    const studentRef = doc(db, "students", studentId);
+    await updateDoc(studentRef, {
+      watchedPresentations: arrayRemove(presentationId),
+    });
   }
 }
 
