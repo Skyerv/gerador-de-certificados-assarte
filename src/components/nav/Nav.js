@@ -33,7 +33,14 @@ const Nav = () => {
           <li>
             <Link
               to="/login"
-              className={pathname === "/login" ? NavCSS.selected : ""}
+              className={
+                pathname === "/login" ||
+                pathname === "/professor" ||
+                pathname === "/cadastrar-apresentacao" ||
+                pathname === "/cadastrar-alunos"
+                  ? NavCSS.selected
+                  : ""
+              }
             >
               Sou Professor
             </Link>
