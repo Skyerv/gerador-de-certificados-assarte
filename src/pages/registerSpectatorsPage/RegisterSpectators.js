@@ -7,7 +7,15 @@ import StudentController from "../../controllers/StudentController";
 import { useParams } from "react-router-dom";
 
 function RegisterSpectators() {
-  const { students } = StudentController();
+  const {
+    students,
+    studentName,
+    setStudentName,
+    handleAddStudent,
+    searchQuery,
+    setSearchQuery,
+    handleSearch,
+  } = StudentController();
 
   const { presentationId } = useParams();
 
@@ -27,12 +35,22 @@ function RegisterSpectators() {
           <form>
             <div className="form-group add-student-form">
               <span>Nome do espectador:</span>
-              <input type="text" placeholder="Nome do espectador" />
-              <Button text="Adicionar" />
+              <input
+                type="text"
+                placeholder="Nome do espectador"
+                value={studentName}
+                onChange={(e) => setStudentName(e.target.value)}
+              />
+              <Button text="Adicionar" onClick={handleAddStudent} />
             </div>
             <div className="form-group search-student-form">
-              <input type="text" placeholder="Pesquisar espectador" />
-              <Button text="Buscar" />
+              <input
+                type="text"
+                placeholder="Pesquisar espectador"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Button text="Buscar" onClick={handleSearch} />
             </div>
           </form>
         </div>
