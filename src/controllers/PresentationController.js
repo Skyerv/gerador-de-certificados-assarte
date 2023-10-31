@@ -11,7 +11,6 @@ const PresentationController = () => {
   const [responsibleName, setResponsibleName] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [presentations, setPresentations] = useState([]);
-  let previousPresentation;
 
   const presentationRepo = useMemo(() => new PresentationRepository(), []);
 
@@ -103,7 +102,6 @@ const PresentationController = () => {
   };
 
   return {
-    previousPresentation,
     title,
     setTitle,
     day,
