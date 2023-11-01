@@ -3,8 +3,11 @@ import Nav from "../../components/nav/Nav";
 import "./SearchCertificates.css";
 import Button from "../../components/Button/Button";
 import CertificateTile from "../../components/certificateTile/CertificateTile";
+import StudentController from "../../controllers/StudentController";
 
 function SearchCertificates() {
+  const { searchQuery, setSearchQuery, students } = StudentController();
+
   return (
     <div className="search-certificates">
       <Nav />
@@ -13,21 +16,22 @@ function SearchCertificates() {
         <div className="search-certificates-form">
           <form>
             <div className="form-group search-certificate-form">
-              <input type="text" placeholder="Pesquisar por nome" />
-              <Button text="Pesquisar"/>
+              <input
+                type="text"
+                placeholder="Pesquisar por nome"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Button text="Pesquisar" />
             </div>
           </form>
           <div className="text-hint">
             <span>Apenas clique em seu nome para baixar o certificado.</span>
           </div>
         </div>
-        <CertificateTile name="Rodrigo Edinael Silveira" theme="Sustentabilidade"/>
-        <CertificateTile name="Rodrigo Edinael Silveira" theme="Artes"/>
-        <CertificateTile name="Rodrigo Edinael Silveira" theme="Ecologia"/>
-        <CertificateTile name="Rodrigo Edinael Silveira" theme="Sustentabilidade"/>
-        <CertificateTile name="Rodrigo Edinael Silveira" theme="Sustentabilidade"/>
-        <CertificateTile name="Rodrigo Edinael Silveira" theme="Sustentabilidade"/>
-        <CertificateTile name="Rodrigo Edinael Silveira" theme="Sustentabilidade"/>
+        {students.map((student) => (
+          <CertificateTile name={student.name} theme="Sustentabilidade" />
+        ))}
       </div>
     </div>
   );

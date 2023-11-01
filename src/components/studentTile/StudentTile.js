@@ -8,8 +8,14 @@ const StudentTile = ({ id, name, onDelete, onEdit }) => {
     <div className={StudentTileCSS.studentTile}>
       <h4>{name}</h4>
       <div className={StudentTileCSS.studentIcons}>
-        <FaEdit onClick={() => onEdit(id, name)} className={StudentTileCSS.editIcon} />
-        <FaTrash onClick={() => onDelete(id)} className={StudentTileCSS.deleteIcon} />
+        <FaEdit
+          onClick={() => onEdit(id, name)}
+          className={StudentTileCSS.editIcon}
+        />
+        <FaTrash
+          onClick={() => onDelete(id)}
+          className={StudentTileCSS.deleteIcon}
+        />
       </div>
     </div>
   );
