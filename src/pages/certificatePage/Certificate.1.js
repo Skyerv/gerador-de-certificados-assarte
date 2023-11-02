@@ -1,36 +1,36 @@
 import { Link, useLocation } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Nav from "../../components/nav/Nav";
-import "./Certificate.css";
-import { useEffect } from "react";
-import StudentController from "../../controllers/StudentController";
-import PresentationController from "../../controllers/PresentationController";
+import { useEffect, useState } from "react";
+import StudentRepository from "../../repositories/studentRepository";
 
-function Certificate() {
-  const { watchedPresentations, setWatchedPresentations } = StudentController();
-  const { fetchPresentationById, calculateDuration } = PresentationController();
+export function Certificate() {
   const location = useLocation();
   const { student } = location.state;
+  const [watchedPresentations, setWatchedPresentations] = useState([]);
+  const studentRepo = new StudentRepository();
 
   useEffect(() => {
     const fetchWatchedPresentations = async () => {
+      const watchedPresentationIds = await studentRepo.getWatchedPresentations(
+        student.id
+      );
       const watchedPresentationData = [];
-      if (student.watchedPresentations) {
-        for (const presentationId of student.watchedPresentations) {
-          const presentation = await fetchPresentationById(presentationId);
-          if (presentation) {
-            watchedPresentationData.push(presentation);
-          }
+
+      for (const presentationId of watchedPresentationIds) {
+        const presentation = await studentRepo.getPresentationData(
+          presentationId
+        );
+        if (presentation) {
+          watchedPresentationData.push(presentation);
         }
       }
 
       setWatchedPresentations(watchedPresentationData);
-      console.log(watchedPresentationData);
     };
 
     fetchWatchedPresentations();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [student.watchedPresentations]);
+  }, [student.id, studentRepo]);
 
   return (
     <div className="Certificate">
@@ -56,17 +56,14 @@ function Certificate() {
             <th>Apresentações</th>
             <th>Duração</th>
           </tr>
-          {watchedPresentations.map((presentation) => (
-            <tr key={presentation.id}>
-              <td>{presentation.title}</td>
-              <td>
-                {calculateDuration(
-                  presentation.startTime,
-                  presentation.endTime
-                )}
-              </td>
-            </tr>
-          ))}
+          <tr>
+            <td>Presentation 1</td>
+            <td>30 minutes</td>
+          </tr>
+          <tr>
+            <td>Presentation 2</td>
+            <td>45 minutes</td>
+          </tr>
         </table>
       </div>
       <div className="downloadCertificateButton">
@@ -77,5 +74,3 @@ function Certificate() {
     </div>
   );
 }
-
-export default Certificate;

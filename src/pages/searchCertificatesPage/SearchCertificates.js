@@ -4,10 +4,15 @@ import "./SearchCertificates.css";
 import Button from "../../components/Button/Button";
 import CertificateTile from "../../components/certificateTile/CertificateTile";
 import StudentController from "../../controllers/StudentController";
+import { useNavigate } from "react-router-dom";
 
 function SearchCertificates() {
   const { searchQuery, setSearchQuery, students } = StudentController();
+  const navigate = useNavigate();
 
+  const handleCertificateClick = (student) => {
+    navigate("/certificado", { state: { student } });
+  };
   return (
     <div className="search-certificates">
       <Nav />
@@ -30,7 +35,9 @@ function SearchCertificates() {
           </div>
         </div>
         {students.map((student) => (
-          <CertificateTile name={student.name} theme="Sustentabilidade" />
+          <div key={student.id} onClick={() => handleCertificateClick(student)}>
+            <CertificateTile name={student.name} theme="Sustentabilidade" />
+          </div>
         ))}
       </div>
     </div>

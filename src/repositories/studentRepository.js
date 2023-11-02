@@ -5,6 +5,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   updateDoc,
 } from "firebase/firestore";
@@ -60,6 +61,18 @@ class StudentRepository {
     await updateDoc(studentRef, {
       watchedPresentations: arrayRemove(presentationId),
     });
+  }
+
+  async getWatchedPresentations(studentId) {
+    const studentRef = doc(db, "students", studentId);
+    const studentDoc = await getDoc(studentRef);
+
+    if (studentDoc.exists()) {
+      const studentData = studentDoc.data();
+      return studentData.watchedPresentations || [];
+    } else {
+      return [];
+    }
   }
 }
 

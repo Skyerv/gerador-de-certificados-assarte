@@ -5,6 +5,7 @@ const StudentController = () => {
   const [studentName, setStudentName] = useState("");
   const [students, setStudents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [watchedPresentations, setWatchedPresentations] = useState([]);
 
   const handleAddStudent = async () => {
     const studentRepo = new StudentRepository();
@@ -69,6 +70,8 @@ const StudentController = () => {
     handleSearch,
     registerWatchedPresentations,
     removeWatchedPresentation,
+    watchedPresentations,
+    setWatchedPresentations,
   };
 };
 

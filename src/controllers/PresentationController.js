@@ -84,22 +84,44 @@ const PresentationController = () => {
     setResponsibleName("");
   };
 
-  const fetchPresentationData = async (presentationId) => {
+  const fetchPresentationById = async (presentationId) => {
     try {
       const presentationData = await presentationRepo.fetchPresentationById(
         presentationId
       );
-
       setTitle(presentationData.title);
       setDay(presentationData.day);
       setStartTime(presentationData.startTime);
       setEndTime(presentationData.endTime);
       setPresenterName(presentationData.presenter);
       setResponsibleName(presentationData.responsible);
+      return presentationData;
     } catch (error) {
       console.error("Error fetching presentation data:", error);
     }
   };
+
+  function calculateDuration(startTime, endTime) {
+    const startTimeParts = startTime.split(":");
+    const endTimeParts = endTime.split(":");
+    
+    const startHours = parseInt(startTimeParts[0]);
+    const startMinutes = parseInt(startTimeParts[1]);
+    const endHours = parseInt(endTimeParts[0]);
+    const endMinutes = parseInt(endTimeParts[1]);
+    
+    let durationHours = endHours - startHours;
+    let durationMinutes = endMinutes - startMinutes;
+    
+    if (durationMinutes < 0) {
+      durationHours--;
+      durationMinutes += 60;
+    }
+    
+    const durationString = `${durationHours.toString().padStart(2, '0')}:${durationMinutes.toString().padStart(2, '0')}`;
+    
+    return durationString;
+  }
 
   return {
     title,
@@ -120,7 +142,8 @@ const PresentationController = () => {
     handleAddPresentation,
     handleEditPresentation,
     handleDeletePresentation,
-    fetchPresentationData,
+    fetchPresentationById,
+    calculateDuration,
   };
 };
 
