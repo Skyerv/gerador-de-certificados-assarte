@@ -1,10 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Nav from "../../components/nav/Nav";
 import "./Certificate.css";
 import { useEffect } from "react";
 import StudentController from "../../controllers/StudentController";
 import PresentationController from "../../controllers/PresentationController";
+import { useLocation } from "react-router-dom";
+import CertificateController from "../../controllers/CertificateController";
 
 function Certificate() {
   const { watchedPresentations, setWatchedPresentations } = StudentController();
@@ -70,9 +71,10 @@ function Certificate() {
         </table>
       </div>
       <div className="downloadCertificateButton">
-        <Link to="/login">
-          <Button text={"Baixar Certificados"} />
-        </Link>
+        <Button
+          text={"Baixar Certificados"}
+          onClick={new CertificateController().downloadCertificateAsPDF}
+        />
       </div>
     </div>
   );
