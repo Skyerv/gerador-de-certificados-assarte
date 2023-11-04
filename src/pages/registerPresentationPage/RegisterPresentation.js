@@ -24,7 +24,7 @@ function RegisterPresentation() {
     setResponsibleName,
     handleAddPresentation,
     handleEditPresentation,
-    fetchPresentationData,
+    fetchPresentationById,
   } = PresentationController();
 
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ function RegisterPresentation() {
 
   useEffect(() => {
     if (presentationId) {
-      fetchPresentationData(presentationId);
+      fetchPresentationById(presentationId);
     }
     // eslint-disable-next-line
   }, []);
