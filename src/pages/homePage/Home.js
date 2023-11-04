@@ -4,9 +4,19 @@ import Nav from "../../components/nav/Nav";
 import PresentationCard from "../../components/presentationCard/PresentationCard";
 import "./Home.css";
 import PresentationController from "../../controllers/PresentationController";
+import EventInfoController from "../../controllers/EventInfoController";
+import { useEffect } from "react";
 
 function Home() {
   const { presentations } = PresentationController();
+  const { description, startDay, endDay, local, phone, get } =
+    EventInfoController();
+
+  useEffect(() => {
+    get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="home-container">
       <Nav />
@@ -19,27 +29,23 @@ function Home() {
             <Button text={"Sou Professor"} />
           </Link>
         </div>
-        <p className="admin-description">
-          Assarte - Associação do Excepcional de Ponta Grossa, Aqui vem a
-          descrição colocado pelo admin.
-        </p>
+        <p className="admin-description">{description}</p>
         <p className="admin-date-hour-informations">
-          Venha participar, a feira ocorrerá dia: ../../2023, das 00:00 até as
-          00:00
+          Venha participar, a feira ocorrerá dia: {startDay} até o dia: {endDay}
         </p>
         <p className="admin-local-information">
-          <strong>Local:</strong>R. Pref. Brásílio Ribas, 775 - São José. Ponta
-          Grossa - Parana, 84010-450
+          <strong>Local:</strong> {local}
         </p>
         <p className="admin-phone-information">
-          <strong>Fone:</strong> (42) 3224-9017
+          <strong>Fone:</strong> {phone}
         </p>
 
         <p>
           <strong>Apresentações:</strong>
         </p>
-        {presentations.map((presentation) => (
+        {presentations.map((presentation, index) => (
           <PresentationCard
+            key={index}
             title={presentation.title}
             date={presentation.day}
             initialHour={presentation.startTime}

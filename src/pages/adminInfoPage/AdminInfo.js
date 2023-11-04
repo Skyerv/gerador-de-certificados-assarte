@@ -5,43 +5,86 @@ import Button from "../../components/Button/Button";
 import AdminSidebar from "../../components/adminSideBar/AdminSideBar";
 
 import "./AdminInfo.css";
+import EventInfoController from "../../controllers/EventInfoController";
 
 function AdminInfo() {
+  const {
+    theme,
+    setTheme,
+    startDay,
+    setStartDay,
+    endDay,
+    setEndDay,
+    description,
+    setDescription,
+    phone,
+    setPhone,
+    local,
+    setLocal,
+    edit,
+  } = EventInfoController();
+
+  const handleEditEventInfo = async (e) => {
+    e.preventDefault();
+    await edit();
+  };
+
   return (
     <div className="event-information-container">
       <Nav />
       <AdminSidebar />
       <div className="event-information-body">
         <h2>Informações da Feira</h2>
-        <form className="formContainer">
+        <form className="formContainer" onSubmit={handleEditEventInfo}>
           <div className="column">
             <div className="form-group">
               <label>Tema:</label>
-              <input type="text" placeholder="Tema" />
+              <input
+                type="text"
+                placeholder="Tema"
+                value={theme}
+                onChange={(e) => setTheme(e.target.value)}
+              />
             </div>
             <div className="form-group">
               <label>Começa:</label>
-              <DateInput />
+              <DateInput value={startDay} onChange={setStartDay} />
             </div>
             <div className="form-group">
               <label>Termina:</label>
-              <DateInput />
+              <DateInput value={endDay} onChange={setEndDay} />
             </div>
             <div className="form-group">
               <label>Descrição:</label>
-              <textarea name="Text1" cols="40" rows="5" />
+              <textarea
+                name="Text1"
+                cols="40"
+                rows="5"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
             </div>
           </div>
           <div className="column">
             <div className="form-group">
               <label>Local:</label>
-              <input type="text" placeholder="Local" />
+              <input
+                type="text"
+                placeholder="Local"
+                value={local}
+                onChange={(e) => setLocal(e.target.value)}
+              />
             </div>
             <div className="form-group">
               <label>Fone:</label>
-              <input type="text" placeholder="(00) 00000-0000" />
+              <input
+                type="text"
+                placeholder="(00) 00000-0000"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
             </div>
-            <Button text="Confirmar" />
+            <Button text="Confirmar" type="submit" />
           </div>
         </form>
       </div>

@@ -64,9 +64,9 @@ function routes() {
         <Route
           path="/admin-info"
           element={
-            <ProtectedRoute>
-              <AdminInfo />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <AdminInfo />
+            // </ProtectedRoute>
           }
         />
       </Routes>

@@ -15,9 +15,7 @@ const PresentationCard = ({
       <div className={PresentationCardCSS.presentationCardContent}>
         <h2 className={PresentationCardCSS.presentationCardTitle}>{title}</h2>
         <p className={PresentationCardCSS.presentationCardDate}>
-          <strong>
-            Dia: {date} das {initialHour} até {finalHour}
-          </strong>
+          <strong>Dia:</strong> {date} das {initialHour} até {finalHour}
         </p>
       </div>
       <div className={PresentationCardCSS.presentationCardDetails}>
