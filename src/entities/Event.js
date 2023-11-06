@@ -1,5 +1,6 @@
-class EventInfo {
-  constructor(theme, startDay, endDay, description, local, phone) {
+class Event {
+  constructor(id, theme, startDay, endDay, description, local, phone) {
+    this.id = id;
     this.theme = theme;
     this.startDay = startDay;
     this.endDay = endDay;
@@ -20,4 +21,4 @@ class EventInfo {
   }
 }
 
-export default EventInfo;
+export default Event;

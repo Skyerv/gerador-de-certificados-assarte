@@ -6,7 +6,8 @@ import PresentationController from "../../controllers/PresentationController";
 
 import "./RegisterPresentation.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import EventController from "../../controllers/EventController";
 
 function RegisterPresentation() {
   const {
@@ -26,27 +27,33 @@ function RegisterPresentation() {
     handleEditPresentation,
     fetchPresentationById,
   } = PresentationController();
+  const { getLastAddedEvent } = EventController();
+  const [event, setEvent] = useState(null);
 
   const navigate = useNavigate();
   const { presentationId } = useParams();
 
   useEffect(() => {
-    if (presentationId) {
-      fetchPresentationById(presentationId);
-    }
+    const fetchData = async () => {
+      const eventData = await getLastAddedEvent();
+      setEvent(eventData);
+      if (presentationId && eventData && eventData.id) {
+        await fetchPresentationById(presentationId, eventData.id);
+      }
+    };
+    fetchData();
     // eslint-disable-next-line
   }, []);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (presentationId) {
-      await handleEditPresentation(presentationId);
+      await handleEditPresentation(presentationId, event.id);
       navigate("/professor");
     } else {
-      handleAddPresentation();
+      handleAddPresentation(event.id);
     }
   };
-
   return (
     <div className="register-presentation-container">
       <Nav />

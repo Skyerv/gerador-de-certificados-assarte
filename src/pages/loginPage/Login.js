@@ -6,12 +6,8 @@ import "./Login.css";
 import TeacherController from "../../controllers/TeacherController";
 
 function Login() {
-  const {
-    email,
-    setEmail,
-    handleSignInTeacher,
-    handleAutoLoginTeacher,
-  } = TeacherController();
+  const { email, setEmail, handleSignInTeacher, handleAutoLoginTeacher } =
+    TeacherController();
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -20,7 +16,8 @@ function Login() {
     e.preventDefault();
     try {
       await handleSignInTeacher(email, password);
-      navigate("/professor");
+      if (email === "admin@admin.com") navigate("/admin-info");
+      else navigate("/professor");
     } catch (error) {
       setError(loginErrorMessage(error.code));
     }

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "../../components/nav/Nav";
 import "./RegisterSpectators.css";
 import Button from "../../components/Button/Button";
 import SpectatorTile from "../../components/spectatorTile/SpectatorTile";
 import StudentController from "../../controllers/StudentController";
 import { useParams } from "react-router-dom";
+import EventController from "../../controllers/EventController";
 
 function RegisterSpectators() {
   const {
@@ -15,9 +16,25 @@ function RegisterSpectators() {
     searchQuery,
     setSearchQuery,
     handleSearch,
+    fetchStudents,
   } = StudentController();
+  const [event, setEvent] = useState(null);
+  const { getLastAddedEvent } = EventController();
 
   const { presentationId } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const eventData = await getLastAddedEvent();
+      setEvent(eventData);
+      if (eventData && eventData.id) {
+        await fetchStudents(eventData.id);
+      }
+    };
+
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchStudents]);
 
   function checkIfPresentationWatched(student) {
     return (
@@ -41,7 +58,10 @@ function RegisterSpectators() {
                 value={studentName}
                 onChange={(e) => setStudentName(e.target.value)}
               />
-              <Button text="Adicionar" onClick={handleAddStudent} />
+              <Button
+                text="Adicionar"
+                onClick={() => handleAddStudent(event.id)}
+              />
             </div>
             <div className="form-group search-student-form">
               <input
@@ -50,7 +70,7 @@ function RegisterSpectators() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Button text="Buscar" onClick={handleSearch} />
+              <Button text="Buscar" onClick={() => handleSearch(event.id)} />
             </div>
           </form>
         </div>
@@ -60,6 +80,7 @@ function RegisterSpectators() {
             student={student}
             presentationId={presentationId}
             isWatched={checkIfPresentationWatched(student)}
+            eventId={event.id}
           />
         ))}
       </div>

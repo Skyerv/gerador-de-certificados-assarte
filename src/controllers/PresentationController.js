@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useMemo } from "react";
 import PresentationRepository from "../repositories/presentationRepository";
 import Presentation from "../entities/Presentation";
 
@@ -14,7 +14,7 @@ const PresentationController = () => {
 
   const presentationRepo = useMemo(() => new PresentationRepository(), []);
 
-  const handleAddPresentation = async () => {
+  const handleAddPresentation = async (eventId) => {
     if (
       title !== "" &&
       day !== "" &&
@@ -33,9 +33,9 @@ const PresentationController = () => {
         responsibleName
       );
 
-      await presentationRepo.add(newPresentation);
+      await presentationRepo.add(newPresentation, eventId);
       resetForm();
-      fetchPresentations();
+      fetchPresentations(eventId);
 
       return "Apresentação realizada com sucesso";
     } else {
@@ -43,7 +43,7 @@ const PresentationController = () => {
     }
   };
 
-  const handleEditPresentation = async (presentationId) => {
+  const handleEditPresentation = async (presentationId, eventId) => {
     if (presentationId) {
       const updatedPresentation = new Presentation(
         presentationId,
@@ -55,25 +55,25 @@ const PresentationController = () => {
         responsibleName
       );
 
-      await presentationRepo.update(presentationId, updatedPresentation);
+      await presentationRepo.update(
+        presentationId,
+        updatedPresentation,
+        eventId
+      );
       resetForm();
-      fetchPresentations();
+      fetchPresentations(eventId);
     }
   };
 
-  const handleDeletePresentation = async (presentationId) => {
-    await presentationRepo.delete(presentationId);
-    fetchPresentations();
+  const handleDeletePresentation = async (presentationId, eventId) => {
+    await presentationRepo.delete(presentationId, eventId);
+    fetchPresentations(eventId);
   };
 
-  const fetchPresentations = useCallback(async () => {
-    const allPresentations = await presentationRepo.getAll();
+  const fetchPresentations = async (eventId) => {
+    const allPresentations = await presentationRepo.getAll(eventId);
     setPresentations(allPresentations);
-  }, [presentationRepo]);
-
-  useEffect(() => {
-    fetchPresentations();
-  }, [fetchPresentations]);
+  };
 
   const resetForm = () => {
     setTitle("");
@@ -84,10 +84,11 @@ const PresentationController = () => {
     setResponsibleName("");
   };
 
-  const fetchPresentationById = async (presentationId) => {
+  const fetchPresentationById = async (presentationId, eventId) => {
     try {
       const presentationData = await presentationRepo.fetchPresentationById(
-        presentationId
+        presentationId,
+        eventId
       );
       setTitle(presentationData.title);
       setDay(presentationData.day);
@@ -104,22 +105,24 @@ const PresentationController = () => {
   function calculateDuration(startTime, endTime) {
     const startTimeParts = startTime.split(":");
     const endTimeParts = endTime.split(":");
-    
+
     const startHours = parseInt(startTimeParts[0]);
     const startMinutes = parseInt(startTimeParts[1]);
     const endHours = parseInt(endTimeParts[0]);
     const endMinutes = parseInt(endTimeParts[1]);
-    
+
     let durationHours = endHours - startHours;
     let durationMinutes = endMinutes - startMinutes;
-    
+
     if (durationMinutes < 0) {
       durationHours--;
       durationMinutes += 60;
     }
-    
-    const durationString = `${durationHours.toString().padStart(2, '0')}:${durationMinutes.toString().padStart(2, '0')}`;
-    
+
+    const durationString = `${durationHours
+      .toString()
+      .padStart(2, "0")}:${durationMinutes.toString().padStart(2, "0")}`;
+
     return durationString;
   }
 
@@ -142,6 +145,7 @@ const PresentationController = () => {
     handleAddPresentation,
     handleEditPresentation,
     handleDeletePresentation,
+    fetchPresentations,
     fetchPresentationById,
     calculateDuration,
   };

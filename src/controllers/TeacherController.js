@@ -22,7 +22,6 @@ const TeacherController = () => {
 
   const handleSignInTeacher = async (email, password) => {
     await authService.signIn(email, password);
-    setEmail("");
   };
 
   const handleSignOutTeacher = async () => {

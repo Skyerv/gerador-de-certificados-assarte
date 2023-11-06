@@ -5,7 +5,7 @@ import Button from "../../components/Button/Button";
 import AdminSidebar from "../../components/adminSideBar/AdminSideBar";
 
 import "./AdminInfo.css";
-import EventInfoController from "../../controllers/EventInfoController";
+import EventController from "../../controllers/EventController";
 
 function AdminInfo() {
   const {
@@ -21,12 +21,12 @@ function AdminInfo() {
     setPhone,
     local,
     setLocal,
-    edit,
-  } = EventInfoController();
+    add,
+  } = EventController();
 
-  const handleEditEventInfo = async (e) => {
+  const handleAddEventInfo = async (e) => {
     e.preventDefault();
-    await edit();
+    await add();
   };
 
   return (
@@ -35,7 +35,7 @@ function AdminInfo() {
       <AdminSidebar />
       <div className="event-information-body">
         <h2>Informações da Feira</h2>
-        <form className="formContainer" onSubmit={handleEditEventInfo}>
+        <form className="formContainer" onSubmit={handleAddEventInfo}>
           <div className="column">
             <div className="form-group">
               <label>Tema:</label>

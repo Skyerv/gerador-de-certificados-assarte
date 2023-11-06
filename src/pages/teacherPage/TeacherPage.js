@@ -6,12 +6,30 @@ import PresentationCard from "../../components/presentationCard/PresentationCard
 import AuthService from "../../services/AuthService";
 import PresentationController from "../../controllers/PresentationController";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import EventController from "../../controllers/EventController";
 
 const authService = new AuthService();
 
 function TeacherPage() {
-  const { presentations, handleDeletePresentation } = PresentationController();
+  const { presentations, handleDeletePresentation, fetchPresentations } =
+    PresentationController();
+  const { getLastAddedEvent } = EventController();
+  const [event, setEvent] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const eventData = await getLastAddedEvent();
+      if (eventData && eventData.id) {
+        fetchPresentations(eventData.id);
+      }
+      setEvent(eventData);
+    };
+
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -66,7 +84,9 @@ function TeacherPage() {
                 className="editIcon"
               />
               <FaTrash
-                onClick={() => handleDeletePresentation(presentation.id)}
+                onClick={() =>
+                  handleDeletePresentation(presentation.id, event.id)
+                }
                 className="deleteIcon"
               />
             </div>

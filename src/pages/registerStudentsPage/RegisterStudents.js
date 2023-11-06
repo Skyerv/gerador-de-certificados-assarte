@@ -3,6 +3,8 @@ import "./RegisterStudents.css";
 import Button from "../../components/Button/Button";
 import StudentTile from "../../components/studentTile/StudentTile";
 import StudentController from "../../controllers/StudentController";
+import EventController from "../../controllers/EventController";
+import { useEffect, useState } from "react";
 
 function RegisterStudents() {
   const {
@@ -15,7 +17,25 @@ function RegisterStudents() {
     handleDeleteStudent,
     handleEditStudent,
     handleSearch,
+    fetchStudents,
   } = StudentController();
+
+  const [event, setEvent] = useState(null);
+
+  const { getLastAddedEvent } = EventController();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const eventData = await getLastAddedEvent();
+      setEvent(eventData);
+      if (eventData && eventData.id) {
+        await fetchStudents(eventData.id);
+      }
+    };
+
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchStudents]);
 
   return (
     <div className="register-students-container">
@@ -32,7 +52,10 @@ function RegisterStudents() {
                 value={studentName}
                 onChange={(e) => setStudentName(e.target.value)}
               />
-              <Button text="Adicionar" onClick={handleAddStudent} />
+              <Button
+                text="Adicionar"
+                onClick={() => handleAddStudent(event.id)}
+              />
             </div>
             <div className="form-group search-student-form">
               <input
@@ -41,7 +64,7 @@ function RegisterStudents() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Button text="Buscar" onClick={handleSearch} />
+              <Button text="Buscar" onClick={() => handleSearch(event.id)} />
             </div>
           </form>
         </div>
@@ -53,6 +76,7 @@ function RegisterStudents() {
               name={student.name}
               onDelete={handleDeleteStudent}
               onEdit={handleEditStudent}
+              eventId={event.id}
             />
           ))}
         </div>

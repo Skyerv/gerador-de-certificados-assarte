@@ -4,16 +4,23 @@ import Nav from "../../components/nav/Nav";
 import PresentationCard from "../../components/presentationCard/PresentationCard";
 import "./Home.css";
 import PresentationController from "../../controllers/PresentationController";
-import EventInfoController from "../../controllers/EventInfoController";
+import EventController from "../../controllers/EventController";
 import { useEffect } from "react";
 
 function Home() {
-  const { presentations } = PresentationController();
-  const { description, startDay, endDay, local, phone, get } =
-    EventInfoController();
+  const { presentations, fetchPresentations } = PresentationController();
+  const { description, startDay, endDay, local, phone, getLastAddedEvent } =
+    EventController();
 
   useEffect(() => {
-    get();
+    const fetchData = async () => {
+      const event = await getLastAddedEvent();
+      if (event && event.id) {
+        fetchPresentations(event.id);
+      }
+    };
+
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -43,9 +50,9 @@ function Home() {
         <p>
           <strong>Apresentações:</strong>
         </p>
-        {presentations.map((presentation, index) => (
+        {presentations.map((presentation) => (
           <PresentationCard
-            key={index}
+            key={presentation.id}
             title={presentation.title}
             date={presentation.day}
             initialHour={presentation.startTime}

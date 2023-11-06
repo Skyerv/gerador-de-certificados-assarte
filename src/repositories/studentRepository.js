@@ -13,26 +13,31 @@ import { db } from "../FirebaseConfiguration";
 import Student from "../entities/Student";
 
 class StudentRepository {
-  async addStudent(name) {
-    const docRef = await addDoc(collection(db, "students"), {
+  async addStudent(name, eventId) {
+    const docRef = await addDoc(collection(db, "events", eventId, "students"), {
       name: name,
     });
     console.log("Document written with ID: ", docRef.id);
   }
 
-  async deleteStudent(studentId) {
-    await deleteDoc(doc(db, "students", studentId));
+  async deleteStudent(studentId, eventId) {
+    await deleteDoc(doc(db, "events", eventId, "students", studentId));
     console.log("Document deleted with ID: ", studentId);
   }
 
-  async updateStudent(studentId, updatedData) {
-    await updateDoc(doc(db, "students", studentId), updatedData);
+  async updateStudent(studentId, updatedData, eventId) {
+    await updateDoc(
+      doc(db, "events", eventId, "students", studentId),
+      updatedData
+    );
     console.log("Document updated with ID: ", studentId);
   }
 
-  async getAllStudents() {
+  async getAllStudents(eventId) {
     let students = [];
-    const querySnapshot = await getDocs(collection(db, "students"));
+    const querySnapshot = await getDocs(
+      collection(db, "events", eventId, "students")
+    );
     querySnapshot.forEach((doc) => {
       const studentData = doc.data();
       const student = new Student(
@@ -45,8 +50,8 @@ class StudentRepository {
     return students;
   }
 
-  async registerWatchedPresentations(studentId, presentationId) {
-    const studentRef = doc(db, "students", studentId);
+  async registerWatchedPresentations(studentId, presentationId, eventId) {
+    const studentRef = doc(db, "events", eventId, "students", studentId);
 
     await updateDoc(studentRef, {
       watchedPresentations: arrayUnion(presentationId),
@@ -56,15 +61,15 @@ class StudentRepository {
     );
   }
 
-  async removeWatchedPresentation(studentId, presentationId) {
-    const studentRef = doc(db, "students", studentId);
+  async removeWatchedPresentation(studentId, presentationId, eventId) {
+    const studentRef = doc(db, "events", eventId, "students", studentId);
     await updateDoc(studentRef, {
       watchedPresentations: arrayRemove(presentationId),
     });
   }
 
-  async getWatchedPresentations(studentId) {
-    const studentRef = doc(db, "students", studentId);
+  async getWatchedPresentations(studentId, eventId) {
+    const studentRef = doc(db, "events", eventId, "students", studentId);
     const studentDoc = await getDoc(studentRef);
 
     if (studentDoc.exists()) {

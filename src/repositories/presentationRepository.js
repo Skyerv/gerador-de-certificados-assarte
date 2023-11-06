@@ -11,30 +11,34 @@ import { db } from "../FirebaseConfiguration";
 import Presentation from "../entities/Presentation";
 
 class PresentationRepository {
-  async add(presentation) {
+  async add(presentation, eventId) {
     const docRef = await addDoc(
-      collection(db, "presentations"),
+      collection(db, "events", eventId, "presentations"),
       presentation.toMap()
     );
     console.log("Document written with ID: ", docRef.id);
   }
 
-  async delete(presentationId) {
-    await deleteDoc(doc(db, "presentations", presentationId));
+  async delete(presentationId, eventId) {
+    await deleteDoc(
+      doc(db, "events", eventId, "presentations", presentationId)
+    );
     console.log("Document deleted with ID: ", presentationId);
   }
 
-  async update(presentationId, updatedData) {
+  async update(presentationId, updatedData, eventId) {
     await updateDoc(
-      doc(db, "presentations", presentationId),
+      doc(db, "events", eventId, "presentations", presentationId),
       updatedData.toMap()
     );
     console.log("Document updated with ID: ", presentationId);
   }
 
-  async getAll() {
+  async getAll(eventId) {
     let presentations = [];
-    const querySnapshot = await getDocs(collection(db, "presentations"));
+    const querySnapshot = await getDocs(
+      collection(db, "events", eventId, "presentations")
+    );
     querySnapshot.forEach((doc) => {
       const presentationData = doc.data();
       const presentation = new Presentation(
@@ -51,9 +55,15 @@ class PresentationRepository {
     return presentations;
   }
 
-  async fetchPresentationById(presentationId) {
+  async fetchPresentationById(presentationId, eventId) {
     var presentation;
-    const presentationRef = doc(db, "presentations", presentationId);
+    const presentationRef = doc(
+      db,
+      "events",
+      eventId,
+      "presentations",
+      presentationId
+    );
     const docSnapshot = await getDoc(presentationRef);
 
     if (docSnapshot.exists()) {

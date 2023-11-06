@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import StudentRepository from "../repositories/studentRepository";
 
 const StudentController = () => {
@@ -7,31 +7,31 @@ const StudentController = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [watchedPresentations, setWatchedPresentations] = useState([]);
 
-  const handleAddStudent = async () => {
+  const handleAddStudent = async (eventId) => {
     const studentRepo = new StudentRepository();
-    await studentRepo.addStudent(studentName);
+    await studentRepo.addStudent(studentName,eventId);
     setStudentName("");
-    fetchStudents();
+    fetchStudents(eventId);
   };
 
-  const handleDeleteStudent = async (studentId) => {
+  const handleDeleteStudent = async (studentId,eventId) => {
     const studentRepo = new StudentRepository();
-    await studentRepo.deleteStudent(studentId);
-    fetchStudents();
+    await studentRepo.deleteStudent(studentId,eventId);
+    fetchStudents(eventId);
   };
 
-  const handleEditStudent = (studentId, currentName) => {
+  const handleEditStudent = (studentId, currentName, eventId) => {
     const newName = prompt("Edit student name:", currentName);
     if (newName !== null) {
       const studentRepo = new StudentRepository();
-      studentRepo.updateStudent(studentId, { name: newName });
-      fetchStudents();
+      studentRepo.updateStudent(studentId, { name: newName }, eventId);
+      fetchStudents(eventId);
     }
   };
 
-  const fetchStudents = useCallback(async () => {
+  const fetchStudents = useCallback(async (eventId) => {
     const studentRepo = new StudentRepository();
-    const allStudents = await studentRepo.getAllStudents();
+    const allStudents = await studentRepo.getAllStudents(eventId);
 
     const filteredStudents = allStudents.filter((student) =>
       student.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -40,22 +40,18 @@ const StudentController = () => {
     setStudents(filteredStudents);
   }, [searchQuery]);
 
-  useEffect(() => {
-    fetchStudents();
-  }, [fetchStudents]);
-
-  const handleSearch = () => {
-    fetchStudents();
+  const handleSearch = (eventId) => {
+    fetchStudents(eventId);
   };
 
-  const registerWatchedPresentations = async (studentId, presentationId) => {
+  const registerWatchedPresentations = async (studentId, presentationId,eventId) => {
     const studentRepo = new StudentRepository();
-    await studentRepo.registerWatchedPresentations(studentId, presentationId);
+    await studentRepo.registerWatchedPresentations(studentId, presentationId,eventId);
   };
 
-  const removeWatchedPresentation = async (studentId, presentationId) => {
+  const removeWatchedPresentation = async (studentId, presentationId,eventId) => {
     const studentRepo = new StudentRepository();
-    await studentRepo.removeWatchedPresentation(studentId, presentationId);
+    await studentRepo.removeWatchedPresentation(studentId, presentationId,eventId);
   };
 
   return {
@@ -72,6 +68,7 @@ const StudentController = () => {
     removeWatchedPresentation,
     watchedPresentations,
     setWatchedPresentations,
+    fetchStudents,
   };
 };
 

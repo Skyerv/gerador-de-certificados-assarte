@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SpectTileCSS from "./SpectatorTile.module.css";
 import StudentController from "../../controllers/StudentController";
 
-const StudentTile = ({ student, presentationId, isWatched }) => {
+const StudentTile = ({ student, presentationId, isWatched, eventId }) => {
   const { registerWatchedPresentations, removeWatchedPresentation } =
     StudentController();
   const [isChecked, setIsChecked] = useState(isWatched);
@@ -10,9 +10,9 @@ const StudentTile = ({ student, presentationId, isWatched }) => {
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
     if (isChecked) {
-      removeWatchedPresentation(student.id, presentationId);
+      removeWatchedPresentation(student.id, presentationId, eventId);
     } else {
-      registerWatchedPresentations(student.id, presentationId);
+      registerWatchedPresentations(student.id, presentationId, eventId);
     }
   };
 
