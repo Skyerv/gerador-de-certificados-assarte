@@ -17,17 +17,25 @@ function RegisterTeacher() {
   } = TeacherController();
 
   const [password, setPassword] = useState("");
+  // Outro jeito de fazer isso, que seria mais correto,
+  // seria fazer o admin cadastrar os emails dos professores,
+  // dae dariamos fetch aqui e verificariamos se o email bate com o digitado.
+  const [secretWord, setSecretWord] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    if (!name || !setName || !password) {
+    if (!name || !email || !password || !secretWord) {
       setError("Preencha todos os campos corretamente.");
       return;
     }
 
     try {
+      if (secretWord !== "teste") {
+        setError("Palavra secreta incorreta");
+        return;
+      }
       await handleSignUpTeacher(email, password);
       const teacher = new Teacher(name, email);
       await handleAddTeacher(teacher);
@@ -84,6 +92,15 @@ function RegisterTeacher() {
                 placeholder="Senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Palavra Secreta:</label>
+              <input
+                type="text"
+                placeholder="Palavra Secreta"
+                value={secretWord}
+                onChange={(e) => setSecretWord(e.target.value)}
               />
             </div>
             <Button text="Cadastrar" type="submit" />
