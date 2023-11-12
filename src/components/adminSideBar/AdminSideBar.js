@@ -21,7 +21,11 @@ const AdminSidebar = () => {
         <li>
           <Link
             to="/admin-gerenciar-professores"
-            className={pathname === "/admin-gerenciar-professores" ? "selected" : ""}
+            className={
+              pathname === "/admin-gerenciar-professores"
+                ? AdminSidebarCSS.selected
+                : ""
+            }
           >
             Gerenciar Professores
           </Link>
@@ -29,7 +33,11 @@ const AdminSidebar = () => {
         <li>
           <Link
             to="/admin-deletar-dados"
-            className={pathname === "/admin-deletar-dados" ? "selected" : ""}
+            className={
+              pathname === "/admin-deletar-dados"
+                ? AdminSidebarCSS.selected
+                : ""
+            }
           >
             Deletar Dados
           </Link>

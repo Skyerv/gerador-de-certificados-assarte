@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "../../components/nav/Nav";
 import Button from "../../components/Button/Button";
@@ -14,28 +14,34 @@ function RegisterTeacher() {
     setEmail,
     handleAddTeacher,
     handleSignUpTeacher,
+    teachers,
+    fetchTeachers,
   } = TeacherController();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchTeachers();
+    };
+    fetchData();
+  }, [fetchTeachers]);
+
   const [password, setPassword] = useState("");
-  // Outro jeito de fazer isso, que seria mais correto,
-  // seria fazer o admin cadastrar os emails dos professores,
-  // dae dariamos fetch aqui e verificariamos se o email bate com o digitado.
-  const [secretWord, setSecretWord] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    if (!name || !email || !password || !secretWord) {
+    if (!name || !email || !password) {
       setError("Preencha todos os campos corretamente.");
       return;
     }
 
+    if (!teachers.some((teacher) => teacher.email === email)) {
+      setError("Esse email não foi cadastrado pelo administrador");
+      return;
+    }
+
     try {
-      if (secretWord !== "teste") {
-        setError("Palavra secreta incorreta");
-        return;
-      }
       await handleSignUpTeacher(email, password);
       const teacher = new Teacher(name, email);
       await handleAddTeacher(teacher);
@@ -92,15 +98,6 @@ function RegisterTeacher() {
                 placeholder="Senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label>Palavra Secreta:</label>
-              <input
-                type="text"
-                placeholder="Palavra Secreta"
-                value={secretWord}
-                onChange={(e) => setSecretWord(e.target.value)}
               />
             </div>
             <Button text="Cadastrar" type="submit" />

@@ -11,6 +11,7 @@ import RegisterSpectators from "./pages/registerSpectatorsPage/RegisterSpectator
 import SearchCertificates from "./pages/searchCertificatesPage/SearchCertificates";
 import AdminInfo from "./pages/adminInfoPage/AdminInfo";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute";
+import AdminTeacher from "./pages/adminRegisterTeacherPage/adminTeacher";
 
 function routes() {
   return (
@@ -66,6 +67,14 @@ function routes() {
           element={
             // <ProtectedRoute>
             <AdminInfo />
+            // </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin-gerenciar-professores"
+          element={
+            // <ProtectedRoute>
+            <AdminTeacher />
             // </ProtectedRoute>
           }
         />
