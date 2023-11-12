@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "../../components/nav/Nav";
 import "./SearchCertificates.css";
 import Button from "../../components/Button/Button";
@@ -7,11 +7,26 @@ import StudentController from "../../controllers/StudentController";
 import { useNavigate } from "react-router-dom";
 
 function SearchCertificates() {
-  const { searchQuery, setSearchQuery, students } = StudentController();
+  const { searchQuery, setSearchQuery, getAllStudentsFromAllEvents } =
+    StudentController();
   const navigate = useNavigate();
+  const [certificates, setCertificates] = useState([]);
 
-  const handleCertificateClick = (student) => {
-    navigate("/certificado", { state: { student } });
+  useEffect(() => {
+    const fetchData = async () => {
+      const certificatesData = await getAllStudentsFromAllEvents();
+      console.log(certificatesData);
+      if (certificatesData) {
+        setCertificates(certificatesData);
+      }
+    };
+
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleCertificateClick = (certificate) => {
+    navigate("/certificado", { state: { certificate } });
   };
   return (
     <div className="search-certificates">
@@ -34,11 +49,23 @@ function SearchCertificates() {
             <span>Apenas clique em seu nome para baixar o certificado.</span>
           </div>
         </div>
-        {students.map((student) => (
-          <div key={student.id} onClick={() => handleCertificateClick(student)}>
-            <CertificateTile name={student.name} theme="Sustentabilidade" />
-          </div>
-        ))}
+        {certificates.map((certificate) => {
+          if (certificate.watchedPresentations) {
+            return (
+              <div
+                key={certificate.studentId}
+                onClick={() => handleCertificateClick(certificate)}
+              >
+                <CertificateTile
+                  name={certificate.name}
+                  theme={certificate.eventTheme}
+                />
+              </div>
+            );
+          } else {
+            return null;
+          }
+        })}
       </div>
     </div>
   );

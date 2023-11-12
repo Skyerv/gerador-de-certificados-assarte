@@ -9,14 +9,14 @@ const StudentController = () => {
 
   const handleAddStudent = async (eventId) => {
     const studentRepo = new StudentRepository();
-    await studentRepo.addStudent(studentName,eventId);
+    await studentRepo.addStudent(studentName, eventId);
     setStudentName("");
     fetchStudents(eventId);
   };
 
-  const handleDeleteStudent = async (studentId,eventId) => {
+  const handleDeleteStudent = async (studentId, eventId) => {
     const studentRepo = new StudentRepository();
-    await studentRepo.deleteStudent(studentId,eventId);
+    await studentRepo.deleteStudent(studentId, eventId);
     fetchStudents(eventId);
   };
 
@@ -29,29 +29,53 @@ const StudentController = () => {
     }
   };
 
-  const fetchStudents = useCallback(async (eventId) => {
-    const studentRepo = new StudentRepository();
-    const allStudents = await studentRepo.getAllStudents(eventId);
+  const fetchStudents = useCallback(
+    async (eventId) => {
+      const studentRepo = new StudentRepository();
+      const allStudents = await studentRepo.getAllStudents(eventId);
 
-    const filteredStudents = allStudents.filter((student) =>
-      student.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+      const filteredStudents = allStudents.filter((student) =>
+        student.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
 
-    setStudents(filteredStudents);
-  }, [searchQuery]);
+      setStudents(filteredStudents);
+    },
+    [searchQuery]
+  );
 
   const handleSearch = (eventId) => {
     fetchStudents(eventId);
   };
 
-  const registerWatchedPresentations = async (studentId, presentationId,eventId) => {
+  const registerWatchedPresentations = async (
+    studentId,
+    presentationId,
+    eventId
+  ) => {
     const studentRepo = new StudentRepository();
-    await studentRepo.registerWatchedPresentations(studentId, presentationId,eventId);
+    await studentRepo.registerWatchedPresentations(
+      studentId,
+      presentationId,
+      eventId
+    );
   };
 
-  const removeWatchedPresentation = async (studentId, presentationId,eventId) => {
+  const removeWatchedPresentation = async (
+    studentId,
+    presentationId,
+    eventId
+  ) => {
     const studentRepo = new StudentRepository();
-    await studentRepo.removeWatchedPresentation(studentId, presentationId,eventId);
+    await studentRepo.removeWatchedPresentation(
+      studentId,
+      presentationId,
+      eventId
+    );
+  };
+
+  const getAllStudentsFromAllEvents = async () => {
+    const studentRepo = new StudentRepository();
+    return await studentRepo.getAllStudentsFromAllEvents();
   };
 
   return {
@@ -69,6 +93,7 @@ const StudentController = () => {
     watchedPresentations,
     setWatchedPresentations,
     fetchStudents,
+    getAllStudentsFromAllEvents,
   };
 };
 

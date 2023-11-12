@@ -79,6 +79,34 @@ class StudentRepository {
       return [];
     }
   }
+
+  async getAllStudentsFromAllEvents() {
+    try {
+      const eventsQuery = await getDocs(collection(db, "events"));
+
+      const allStudents = [];
+
+      for (const eventDoc of eventsQuery.docs) {
+        const studentsQuery = await getDocs(
+          collection(eventDoc.ref, "students")
+        );
+        studentsQuery.forEach((studentDoc) => {
+          const studentData = studentDoc.data();
+          allStudents.push({
+            eventId: eventDoc.id,
+            eventTheme: eventDoc.data().theme,
+            studentId: studentDoc.id,
+            ...studentData,
+          });
+        });
+      }
+
+      return allStudents;
+    } catch (error) {
+      console.error("Error getting students from Firestore:", error);
+      return [];
+    }
+  }
 }
 
 export default StudentRepository;
