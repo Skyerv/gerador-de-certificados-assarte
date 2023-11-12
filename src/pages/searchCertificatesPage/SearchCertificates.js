@@ -11,6 +11,8 @@ function SearchCertificates() {
     StudentController();
   const navigate = useNavigate();
   const [certificates, setCertificates] = useState([]);
+  const [filteredCertificates, setFilteredCertificates] = useState([]);
+  const [searchClicked, setSearchClicked] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,9 +27,24 @@ function SearchCertificates() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (searchQuery === "") {
+      setSearchClicked(false);
+    }
+  }, [searchQuery]);
+
   const handleCertificateClick = (certificate) => {
     navigate("/certificado", { state: { certificate } });
   };
+
+  const handleSearch = () => {
+    const filtered = certificates.filter((certificate) =>
+      certificate.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredCertificates(filtered);
+    setSearchClicked(true);
+  };
+
   return (
     <div className="search-certificates">
       <Nav />
@@ -42,30 +59,29 @@ function SearchCertificates() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Button text="Pesquisar" />
+              <Button text="Pesquisar" onClick={handleSearch} />
             </div>
           </form>
           <div className="text-hint">
             <span>Apenas clique em seu nome para baixar o certificado.</span>
           </div>
         </div>
-        {certificates.map((certificate) => {
-          if (certificate.watchedPresentations) {
-            return (
-              <div
-                key={certificate.studentId}
-                onClick={() => handleCertificateClick(certificate)}
-              >
-                <CertificateTile
-                  name={certificate.name}
-                  theme={certificate.eventTheme}
-                />
-              </div>
-            );
-          } else {
-            return null;
-          }
-        })}
+        {searchClicked && (
+          <>
+            {searchQuery !== "" &&
+              filteredCertificates.map((certificate) => (
+                <div
+                  key={certificate.studentId}
+                  onClick={() => handleCertificateClick(certificate)}
+                >
+                  <CertificateTile
+                    name={certificate.name}
+                    theme={certificate.eventTheme}
+                  />
+                </div>
+              ))}
+          </>
+        )}
       </div>
     </div>
   );
