@@ -65,17 +65,17 @@ function routes() {
         <Route
           path="/admin-info"
           element={
-            // <ProtectedRoute>
-            <AdminInfo />
-            // </ProtectedRoute>
+            <ProtectedRoute>
+              <AdminInfo />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/admin-gerenciar-professores"
           element={
-            // <ProtectedRoute>
-            <AdminTeacher />
-            // </ProtectedRoute>
+            <ProtectedRoute>
+              <AdminTeacher />
+            </ProtectedRoute>
           }
         />
       </Routes>

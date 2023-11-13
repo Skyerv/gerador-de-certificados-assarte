@@ -25,9 +25,9 @@ class AuthService {
     return new Promise((resolve) => {
       appAuth.onAuthStateChanged((user) => {
         if (user) {
-          resolve(true);
+          resolve(user.email);
         } else {
-          resolve(false);
+          resolve("");
         }
       });
     });

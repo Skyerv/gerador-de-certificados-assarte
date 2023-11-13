@@ -38,9 +38,11 @@ function Login() {
 
   useEffect(() => {
     const checkAutoLogin = async () => {
-      const isUserLoggedIn = await handleAutoLoginTeacher();
+      const userEmail = await handleAutoLoginTeacher();
       try {
-        if (isUserLoggedIn) {
+        if (userEmail === "admin@admin.com") {
+          navigate("/admin-info");
+        } else if (userEmail !== "") {
           navigate("/professor");
         }
       } catch (error) {
