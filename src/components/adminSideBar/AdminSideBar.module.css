@@ -21,6 +21,10 @@
   padding: 10px;
 }
 
+.sidebar li button {
+  width: 100%;
+}
+
 .sidebar a {
   color: #01496d;
   font-weight: bold;

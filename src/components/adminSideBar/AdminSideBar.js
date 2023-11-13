@@ -1,8 +1,19 @@
+import AuthService from "../../services/AuthService";
+import Button from "../Button/Button";
 import AdminSidebarCSS from "./AdminSideBar.module.css";
-import { Link, useLocation } from "react-router-dom";
-
+import { Link, Navigate, useLocation } from "react-router-dom";
+const authService = new AuthService();
 const AdminSidebar = () => {
   const { pathname } = useLocation();
+
+  const handleLogout = async () => {
+    try {
+      await authService.signOut();
+      Navigate("/login");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
   return (
     <div className={AdminSidebarCSS.sidebar}>
@@ -40,6 +51,11 @@ const AdminSidebar = () => {
             }
           >
             Deletar Dados
+          </Link>
+        </li>
+        <li>
+          <Link to="/login">
+            <Button text="Logout" color="red" onClick={handleLogout} />
           </Link>
         </li>
       </ul>
