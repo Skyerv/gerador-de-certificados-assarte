@@ -95,6 +95,8 @@ class StudentRepository {
           allStudents.push({
             eventId: eventDoc.id,
             eventTheme: eventDoc.data().theme,
+            eventStartDay: eventDoc.data().startDay,
+            eventEndDay: eventDoc.data().endDay,
             studentId: studentDoc.id,
             ...studentData,
           });

@@ -18,7 +18,10 @@ function Certificate() {
       const watchedPresentationData = [];
       if (certificate.watchedPresentations) {
         for (const presentationId of certificate.watchedPresentations) {
-          const presentation = await fetchPresentationById(presentationId, certificate.eventId);
+          const presentation = await fetchPresentationById(
+            presentationId,
+            certificate.eventId
+          );
           if (presentation) {
             watchedPresentationData.push(presentation);
           }
@@ -46,8 +49,9 @@ function Certificate() {
       <p className="certificate-p intro-p">Este certificado comprova que</p>
       <h1 className="name">{certificate.name}</h1>
       <p className="certificate-p">
-        Participou da <strong>Feira Cultural ASARTE</strong>, com o tema
-        sustentabilidade como espectador no dia: 27/05/2023 Assistindo as
+        Participou da <strong>Feira Cultural ASARTE</strong>, com o tema{" "}
+        {certificate.eventTheme} que ocorreu nos dias:{" "}
+        {certificate.eventStartDay} até {certificate.eventEndDay} Assistindo as
         apresentações:
       </p>
 

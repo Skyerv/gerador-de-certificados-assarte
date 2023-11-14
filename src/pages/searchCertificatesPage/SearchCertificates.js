@@ -34,6 +34,7 @@ function SearchCertificates() {
   }, [searchQuery]);
 
   const handleCertificateClick = (certificate) => {
+    console.log(certificate);
     navigate("/certificado", { state: { certificate } });
   };
 
