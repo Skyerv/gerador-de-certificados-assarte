@@ -63,7 +63,7 @@ function Login() {
             <div className="form-group">
               <label>Email:</label>
               <input
-                required="true"
+                required={true}
                 type="email"
                 placeholder="Email"
                 value={email}
@@ -73,7 +73,7 @@ function Login() {
             <div className="form-group">
               <label>Senha:</label>
               <input
-                required="true"
+                required={true}
                 type="password"
                 placeholder="Password"
                 value={password}
