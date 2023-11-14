@@ -41,17 +41,6 @@ const EventController = () => {
     }
   };
 
-  // const get = async () => {
-  //   const eventInfoRepo = new EventRepository();
-  //   const eventInfo = await eventInfoRepo.get();
-  //   setTheme(eventInfo.theme);
-  //   setStartDay(eventInfo.startDay);
-  //   setEndDay(eventInfo.endDay);
-  //   setDescription(eventInfo.description);
-  //   setPhone(eventInfo.phone);
-  //   setLocal(eventInfo.local);
-  // };
-
   return {
     theme,
     setTheme,
