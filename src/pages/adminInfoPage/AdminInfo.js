@@ -84,7 +84,7 @@ function AdminInfo() {
                 onChange={(e) => setPhone(e.target.value)}
               />
             </div>
-            <Button text="Confirmar" type="submit" />
+            <Button text="Criar Nova Feira" type="submit" />
           </div>
         </form>
       </div>

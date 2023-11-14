@@ -42,18 +42,6 @@ const AdminSidebar = () => {
           </Link>
         </li>
         <li>
-          <Link
-            to="/admin-deletar-dados"
-            className={
-              pathname === "/admin-deletar-dados"
-                ? AdminSidebarCSS.selected
-                : ""
-            }
-          >
-            Deletar Dados
-          </Link>
-        </li>
-        <li>
           <Link to="/login">
             <Button text="Logout" color="red" onClick={handleLogout} />
           </Link>
