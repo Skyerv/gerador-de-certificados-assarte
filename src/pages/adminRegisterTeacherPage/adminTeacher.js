@@ -24,6 +24,11 @@ function AdminTeacher() {
     fetchData();
   }, [fetchTeachers]);
 
+  async function handleRegisterTeacherEmail(e) {
+    e.preventDefault();
+    await handleRegisterTeacher();
+  }
+
   return (
     <div className="register-students-container">
       <Nav />
@@ -31,19 +36,17 @@ function AdminTeacher() {
       <div className="register-students-body">
         <div className="register-students-form">
           <h2>Cadastro de emails de professores</h2>
-          <form>
+          <form onSubmit={handleRegisterTeacherEmail}>
             <div className="form-group add-student-form">
               <span>Email do professor:</span>
               <input
+                required={true}
                 type="text"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <Button
-                text="Adicionar"
-                onClick={() => handleRegisterTeacher()}
-              />
+              <Button text="Adicionar" type="submit" />
             </div>
           </form>
         </div>

@@ -76,6 +76,7 @@ function RegisterTeacher() {
             <div className="form-group">
               <label>Nome:</label>
               <input
+                required={true}
                 type="text"
                 placeholder="Nome"
                 value={name}
@@ -85,6 +86,7 @@ function RegisterTeacher() {
             <div className="form-group">
               <label>Email:</label>
               <input
+                required={true}
                 type="email"
                 placeholder="Email"
                 value={email}
@@ -94,6 +96,7 @@ function RegisterTeacher() {
             <div className="form-group">
               <label>Senha:</label>
               <input
+                required={true}
                 type="password"
                 placeholder="Senha"
                 value={password}

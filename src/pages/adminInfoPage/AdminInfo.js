@@ -40,6 +40,7 @@ function AdminInfo() {
             <div className="form-group">
               <label>Tema:</label>
               <input
+                required={true}
                 type="text"
                 placeholder="Tema"
                 value={theme}
@@ -57,6 +58,7 @@ function AdminInfo() {
             <div className="form-group">
               <label>Descrição:</label>
               <textarea
+                required="true"
                 name="Text1"
                 cols="40"
                 rows="5"
@@ -69,6 +71,7 @@ function AdminInfo() {
             <div className="form-group">
               <label>Local:</label>
               <input
+                required="true"
                 type="text"
                 placeholder="Local"
                 value={local}
@@ -78,6 +81,7 @@ function AdminInfo() {
             <div className="form-group">
               <label>Fone:</label>
               <input
+                required="true"
                 type="text"
                 placeholder="(00) 00000-0000"
                 value={phone}

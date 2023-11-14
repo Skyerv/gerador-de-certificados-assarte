@@ -16,6 +16,7 @@ const TimeInput = ({ value, onChange }) => {
 
   return (
     <input
+      required={true}
       type="text"
       placeholder="HH:MM"
       value={value}

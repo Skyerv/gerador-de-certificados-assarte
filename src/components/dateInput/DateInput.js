@@ -19,6 +19,7 @@ const DateInput = ({ value, onChange }) => {
 
   return (
     <input
+      required={true}
       type="text"
       placeholder="DD/MM/YYYY"
       value={value}

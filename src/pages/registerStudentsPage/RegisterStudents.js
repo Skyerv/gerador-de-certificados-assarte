@@ -37,25 +37,28 @@ function RegisterStudents() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchStudents]);
 
+  function handAddStudentForm(e) {
+    e.preventDefault();
+    handleAddStudent(event.id);
+  }
+
   return (
     <div className="register-students-container">
       <Nav />
       <div className="register-students-body">
         <div className="register-students-form">
           <h2>Cadastro de Alunos</h2>
-          <form>
+          <form onSubmit={(e) => handAddStudentForm(e)}>
             <div className="form-group add-student-form">
               <span>Nome do aluno:</span>
               <input
+                required={true}
                 type="text"
                 placeholder="Nome do aluno"
                 value={studentName}
                 onChange={(e) => setStudentName(e.target.value)}
               />
-              <Button
-                text="Adicionar"
-                onClick={() => handleAddStudent(event.id)}
-              />
+              <Button text="Adicionar" type="submit" />
             </div>
             <div className="form-group search-student-form">
               <input

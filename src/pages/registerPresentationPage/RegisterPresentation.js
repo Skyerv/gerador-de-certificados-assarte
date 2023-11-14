@@ -66,6 +66,7 @@ function RegisterPresentation() {
             <div className="form-group">
               <label>Título:</label>
               <input
+                required={true}
                 type="text"
                 placeholder="Título da apresentação"
                 value={title}
@@ -92,6 +93,7 @@ function RegisterPresentation() {
             <div className="form-group">
               <label>Nome do Apresentador:</label>
               <input
+                required={true}
                 type="text"
                 placeholder="Nome do Apresentador"
                 value={presenterName}
@@ -101,6 +103,7 @@ function RegisterPresentation() {
             <div className="form-group">
               <label>Nome do Responsável:</label>
               <input
+                required={true}
                 type="text"
                 placeholder="Nome do Responsável"
                 value={responsibleName}

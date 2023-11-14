@@ -43,25 +43,28 @@ function RegisterSpectators() {
     );
   }
 
+  async function handleAddStudentForm(e) {
+    e.preventDefault();
+    await handleAddStudent(event.id);
+  }
+
   return (
     <div className="register-spectator">
       <Nav />
       <div className="register-spectator-container">
         <div className="register-spectator-form">
           <h2>Cadastro de Espectadores</h2>
-          <form>
+          <form onSubmit={(e) => handleAddStudentForm(e)}>
             <div className="form-group add-student-form">
               <span>Nome do espectador:</span>
               <input
+                required={true}
                 type="text"
                 placeholder="Nome do espectador"
                 value={studentName}
                 onChange={(e) => setStudentName(e.target.value)}
               />
-              <Button
-                text="Adicionar"
-                onClick={() => handleAddStudent(event.id)}
-              />
+              <Button text="Adicionar" type="submit" />
             </div>
             <div className="form-group search-student-form">
               <input
