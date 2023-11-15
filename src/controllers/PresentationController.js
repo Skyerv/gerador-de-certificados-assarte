@@ -35,7 +35,6 @@ const PresentationController = () => {
 
       await presentationRepo.add(newPresentation, eventId);
       resetForm();
-      fetchPresentations(eventId);
 
       return "Apresentação realizada com sucesso";
     } else {
@@ -61,7 +60,6 @@ const PresentationController = () => {
         eventId
       );
       resetForm();
-      fetchPresentations(eventId);
     }
   };
 
