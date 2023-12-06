@@ -6,18 +6,41 @@ import "./Login.css";
 import TeacherController from "../../controllers/TeacherController";
 
 function Login() {
-  const { email, setEmail, handleSignInTeacher, handleAutoLoginTeacher } =
-    TeacherController();
+  const {
+    email,
+    setEmail,
+    handleSignInTeacher,
+    handleAutoLoginTeacher,
+    teachers,
+    fetchTeachers,
+  } = TeacherController();
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchTeachers();
+    };
+    fetchData();
+  }, [fetchTeachers]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      if (
+        !teachers.some((teacher) => teacher.email === email) &&
+        email !== "admin@admin.com"
+      ) {
+        setError("Esse email não foi cadastrado pelo administrador");
+        return;
+      }
+
       await handleSignInTeacher(email, password);
       if (email === "admin@admin.com") navigate("/admin-info");
-      else navigate("/professor");
+      else {
+        navigate("/professor");
+      }
     } catch (error) {
       setError(loginErrorMessage(error.code));
     }
