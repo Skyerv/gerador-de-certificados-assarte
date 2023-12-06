@@ -5,6 +5,8 @@ import {
   doc,
   getDoc,
   getDocs,
+  orderBy,
+  query,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../FirebaseConfiguration";
@@ -36,9 +38,15 @@ class PresentationRepository {
 
   async getAll(eventId) {
     let presentations = [];
+
     const querySnapshot = await getDocs(
-      collection(db, "events", eventId, "presentations")
+      query(
+        collection(db, "events", eventId, "presentations"),
+        orderBy("day", "desc"),
+        orderBy("startTime", "desc")
+      )
     );
+
     querySnapshot.forEach((doc) => {
       const presentationData = doc.data();
       const presentation = new Presentation(
@@ -52,6 +60,7 @@ class PresentationRepository {
       );
       presentations.push(presentation);
     });
+
     return presentations;
   }
 
